@@ -1,0 +1,141 @@
+{
+  "raw_rows": 540,
+  "unique_native_count": 540,
+  "pivot_index": 0,
+  "family": "full-xz",
+  "alphabet": [
+    "I",
+    "X",
+    "Z"
+  ],
+  "max_rot": 3,
+  "enable_c2_fallback": true,
+  "native_tail_bucket_sizes": {
+    "X": 112,
+    "Y": 32,
+    "Z": 112
+  },
+  "native_rotation_axis_count": 245,
+  "c2_candidate_count": 73305,
+  "commuting_pairs": 93690,
+  "anti_commuting_pairs": 51840,
+  "total_targets": 177147,
+  "direct_hits": 111,
+  "rot_only_hits": 168678,
+  "c2_fallback_hits": 2,
+  "one_measure_hits": 168789,
+  "overall_hits": 168791,
+  "misses": 8356,
+  "direct_hit_rate_percent": 0.06265982489119207,
+  "rot_only_hit_rate_percent": 95.21922471168013,
+  "one_measure_hit_rate_percent": 95.28188453657133,
+  "c2_fallback_hit_rate_percent": 0.0011290058538953524,
+  "overall_hit_rate_percent": 95.28301354242522,
+  "direct_by_basis": {
+    "X": 54,
+    "Y": 9,
+    "Z": 54
+  },
+  "rot_by_basis": {
+    "X": 163969,
+    "Y": 134936,
+    "Z": 163969
+  },
+  "c2_by_basis": {
+    "X": 0,
+    "Y": 2,
+    "Z": 0
+  },
+  "rot_depth_hist": {
+    "1": 1428,
+    "2": 27242,
+    "3": 140008
+  },
+  "sample_direct_hits": [
+    {
+      "tail11": "IIIIIIIIIII",
+      "options": [
+        {
+          "basis": "X",
+          "full_pauli": "XIIIIIIIIIII"
+        },
+        {
+          "basis": "Y",
+          "full_pauli": "YIIIIIIIIIII"
+        },
+        {
+          "basis": "Z",
+          "full_pauli": "ZIIIIIIIIIII"
+        }
+      ]
+    }
+  ],
+  "sample_rot_hits": [
+    {
+      "tail11": "IIIIIIIIIIX",
+      "best_depth": 3,
+      "options": [
+        {
+          "basis": "X",
+          "full_pauli": "XIIIIIIIIIIX",
+          "rot_depth": 3
+        },
+        {
+          "basis": "Y",
+          "full_pauli": "YIIIIIIIIIIX",
+          "rot_depth": 3
+        },
+        {
+          "basis": "Z",
+          "full_pauli": "ZIIIIIIIIIIX",
+          "rot_depth": 3
+        }
+      ]
+    }
+  ],
+  "sample_c2_hits": [
+    {
+      "tail11": "IZXZXXIIXII",
+      "options": [
+        {
+          "basis": "Y",
+          "full_pauli": "YIZXZXXIIXII",
+          "witnesses": [
+            {
+              "left_pauli": "IIIIIIIIIIIX",
+              "right_pauli": "YIZXZXXIIXIX",
+              "left_witness": {
+                "dx": "2",
+                "dy": "4",
+                "p1": "I",
+                "p7": "X",
+                "block0": "IIIIII",
+                "block1": "IIIIIX",
+                "full_pauli": "IIIIIIIIIIIX"
+              },
+              "right_witness": {
+                "dx": "1",
+                "dy": "3",
+                "p1": "Y",
+                "p7": "X",
+                "block0": "YIZXZX",
+                "block1": "XIIXIX",
+                "full_pauli": "YIZXZXXIIXIX"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sample_misses": [
+    {
+      "tail11": "IIIIIIIIZXX",
+      "candidates": {
+        "X": "XIIIIIIIIZXX",
+        "Y": "YIIIIIIIIZXX",
+        "Z": "ZIIIIIIIIZXX"
+      }
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "raw_rows": 540,
+  "unique_native_count": 540,
+  "pivot_index": 0,
+  "family": "full-xz",
+  "alphabet": [
+    "I",
+    "X",
+    "Z"
+  ],
+  "max_rot": 4,
+  "enable_c2_fallback": true,
+  "native_tail_bucket_sizes": {
+    "X": 112,
+    "Y": 32,
+    "Z": 112
+  },
+  "native_rotation_axis_count": 245,
+  "c2_candidate_count": 73305,
+  "commuting_pairs": 93690,
+  "anti_commuting_pairs": 51840,
+  "total_targets": 177147,
+  "direct_hits": 111,
+  "rot_only_hits": 177036,
+  "c2_fallback_hits": 0,
+  "one_measure_hits": 177147,
+  "overall_hits": 177147,
+  "misses": 0,
+  "direct_hit_rate_percent": 0.06265982489119207,
+  "rot_only_hit_rate_percent": 99.9373401751088,
+  "one_measure_hit_rate_percent": 100.0,
+  "c2_fallback_hit_rate_percent": 0.0,
+  "overall_hit_rate_percent": 100.0,
+  "direct_by_basis": {
+    "X": 54,
+    "Y": 9,
+    "Z": 54
+  },
+  "rot_by_basis": {
+    "X": 172327,
+    "Y": 143294,
+    "Z": 172327
+  },
+  "c2_by_basis": {
+    "X": 0,
+    "Y": 0,
+    "Z": 0
+  },
+  "rot_depth_hist": {
+    "1": 1428,
+    "2": 27242,
+    "3": 140008,
+    "4": 8358
+  },
+  "sample_direct_hits": [
+    {
+      "tail11": "IIIIIIIIIII",
+      "options": [
+        {
+          "basis": "X",
+          "full_pauli": "XIIIIIIIIIII"
+        },
+        {
+          "basis": "Y",
+          "full_pauli": "YIIIIIIIIIII"
+        },
+        {
+          "basis": "Z",
+          "full_pauli": "ZIIIIIIIIIII"
+        }
+      ]
+    }
+  ],
+  "sample_rot_hits": [
+    {
+      "tail11": "IIIIIIIIIIX",
+      "best_depth": 3,
+      "options": [
+        {
+          "basis": "X",
+          "full_pauli": "XIIIIIIIIIIX",
+          "rot_depth": 3
+        },
+        {
+          "basis": "Y",
+          "full_pauli": "YIIIIIIIIIIX",
+          "rot_depth": 3
+        },
+        {
+          "basis": "Z",
+          "full_pauli": "ZIIIIIIIIIIX",
+          "rot_depth": 3
+        }
+      ]
+    }
+  ],
+  "sample_c2_hits": [],
+  "sample_misses": []
+}

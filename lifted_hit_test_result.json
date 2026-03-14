@@ -1,0 +1,53 @@
+{
+  "target_logical_pauli": "XIIIIIIXIIII",
+  "target_logical_symplectic": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "num_hits": 0,
+  "hits": [],
+  "diagnostics": {
+    "logical_dim": 24,
+    "physical_dim": 288,
+    "n_physical_qubits": 144,
+    "hx_shape": [
+      72,
+      144
+    ],
+    "hz_shape": [
+      72,
+      144
+    ],
+    "stabilizer_rank": 132,
+    "lift_basis_checks_passed": true,
+    "lift_basis_check_details": {
+      "logical_x_commutes_with_stabilizers": true,
+      "logical_z_commutes_with_stabilizers": true,
+      "xz_pairings_identity": true,
+      "xx_pairings_zero": true,
+      "zz_pairings_zero": true
+    }
+  }
+}

@@ -1,0 +1,737 @@
+{
+  "raw_rows": 540,
+  "unique_native_count": 540,
+  "pivot_index": 0,
+  "family": "full-xyz",
+  "alphabet": [
+    "I",
+    "X",
+    "Y",
+    "Z"
+  ],
+  "mode": "crot1",
+  "native_tail_bucket_sizes": {
+    "X": 112,
+    "Y": 32,
+    "Z": 112
+  },
+  "native_rotation_axis_count": 245,
+  "total_targets": 4194304,
+  "direct_hits": 246,
+  "crot1_only_hits": 12579,
+  "combined_hits": 12825,
+  "misses": 4181479,
+  "direct_hit_rate_percent": 0.0058650970458984375,
+  "crot_only_hit_rate_percent": 0.29990673065185547,
+  "combined_hit_rate_percent": 0.3057718276977539,
+  "direct_by_basis": {
+    "X": 112,
+    "Y": 32,
+    "Z": 112
+  },
+  "crot_by_basis": {
+    "X": 9526,
+    "Y": 3543,
+    "Z": 9526
+  },
+  "sample_direct_hits": [
+    {
+      "tail11": "IIIIIIIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIIIIIIIII",
+        "YIIIIIIIIIII",
+        "ZIIIIIIIIIII"
+      ]
+    },
+    {
+      "tail11": "IIIIIXIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIIIXIIIII",
+        "YIIIIIXIIIII",
+        "ZIIIIIXIIIII"
+      ]
+    },
+    {
+      "tail11": "IIIIIYIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIIIYIIIII",
+        "YIIIIIYIIIII",
+        "ZIIIIIYIIIII"
+      ]
+    },
+    {
+      "tail11": "IIIIIZIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIIIZIIIII",
+        "YIIIIIZIIIII",
+        "ZIIIIIZIIIII"
+      ]
+    },
+    {
+      "tail11": "IIIIZIIIIII",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIIIIZIIIIII"
+      ]
+    },
+    {
+      "tail11": "IIIIZIIXIIX",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIIIIZIIXIIX"
+      ]
+    },
+    {
+      "tail11": "IIIIZZIIIIZ",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIIIIZZIIIIZ"
+      ]
+    },
+    {
+      "tail11": "IIIIZZIXIIY",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIIIIZZIXIIY"
+      ]
+    },
+    {
+      "tail11": "IIXIXIIIIII",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXIXIIIIII"
+      ]
+    },
+    {
+      "tail11": "IIXIXXIIXIX",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXIXXIIXIX"
+      ]
+    },
+    {
+      "tail11": "IIXIXYIZXZX",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXIXYIZXZX"
+      ]
+    },
+    {
+      "tail11": "IIXIXZIZIZI",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXIXZIZIZI"
+      ]
+    },
+    {
+      "tail11": "IIXXIIIIIII",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXIIIIIII"
+      ]
+    },
+    {
+      "tail11": "IIXXIIIZZII",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXIIIZZII"
+      ]
+    },
+    {
+      "tail11": "IIXXIXIIXXI",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXIXIIXXI"
+      ]
+    },
+    {
+      "tail11": "IIXXIXIZYXI",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXIXIZYXI"
+      ]
+    },
+    {
+      "tail11": "IIXXXIIIIII",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXXIIIIII"
+      ]
+    },
+    {
+      "tail11": "IIXXXIZIZZZ",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXXIZIZZZ"
+      ]
+    },
+    {
+      "tail11": "IIXXXXIIXXX",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXXXIIXXX"
+      ]
+    },
+    {
+      "tail11": "IIXXXXZIYYY",
+      "hit_bases": [
+        "X"
+      ],
+      "full_paulis": [
+        "XIIXXXXZIYYY"
+      ]
+    }
+  ],
+  "sample_crot_hits": [
+    {
+      "tail11": "IIIIIIIIIXI",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIIIIXI",
+          "source_full_pauli": "ZIZZYIZIZZYI",
+          "source_tail": "IZZYIZIZZYI",
+          "rotation_axis_tail": "IZZYIZIZZZI",
+          "rotation_axis_full_pauli": "ZIZZYIZIZZZI"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIIIZI",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIIIZI",
+          "source_full_pauli": "XXIIXIXXIIXI",
+          "source_tail": "XIIXIXXIIXI",
+          "rotation_axis_tail": "XIIXIXXIIYI",
+          "rotation_axis_full_pauli": "XXIIXIXXIIYI"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIIIZZ",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIIIZZ",
+          "source_full_pauli": "XIXXIXXIXXIX",
+          "source_tail": "IXXIXXIXXIX",
+          "rotation_axis_tail": "IXXIXXIXXZY",
+          "rotation_axis_full_pauli": "XIXXIXXIXXZY"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIIXII",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIIIXII",
+          "source_full_pauli": "ZIZYZZZIZYZZ",
+          "source_tail": "IZYZZZIZYZZ",
+          "rotation_axis_tail": "IZYZZZIZZZZ",
+          "rotation_axis_full_pauli": "ZIZYZZZIZZZZ"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIIXXI",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIIIXXI",
+          "source_full_pauli": "ZIZYXIZIZYXI",
+          "source_tail": "IZYXIZIZYXI",
+          "rotation_axis_tail": "IZYXIZIZZII",
+          "rotation_axis_full_pauli": "ZIZYXIZIZZII"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIIZII",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIIZII",
+          "source_full_pauli": "XXXXXIXXXXXI",
+          "source_tail": "XXXXIXXXXXI",
+          "rotation_axis_tail": "XXXXIXXXYXI",
+          "rotation_axis_full_pauli": "XXXXXIXXXYXI"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIIZZZ",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIIZZZ",
+          "source_full_pauli": "XXXXIIXXXXII",
+          "source_tail": "XXXIIXXXXII",
+          "rotation_axis_tail": "XXXIIXXXYZZ",
+          "rotation_axis_full_pauli": "XXXXIIXXXYZZ"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIXIII",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIIXIII",
+          "source_full_pauli": "ZIYIIZZIYIIZ",
+          "source_tail": "IYIIZZIYIIZ",
+          "rotation_axis_tail": "IYIIZZIZIIZ",
+          "rotation_axis_full_pauli": "ZIYIIZZIZIIZ"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIXIIX",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIIXIIX",
+          "source_full_pauli": "ZIXIIYZIXIIY",
+          "source_tail": "IXIIYZIXIIY",
+          "rotation_axis_tail": "IXIIYZIIIIZ",
+          "rotation_axis_full_pauli": "ZIXIIYZIIIIZ"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIXIXI",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIIXIXI",
+          "source_full_pauli": "ZZYIXZZZYIXZ",
+          "source_tail": "ZYIXZZZYIXZ",
+          "rotation_axis_tail": "ZYIXZZZZIIZ",
+          "rotation_axis_full_pauli": "ZZYIXZZZZIIZ"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIZIII",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIZIII",
+          "source_full_pauli": "XIXXXIXIXXXI",
+          "source_tail": "IXXXIXIXXXI",
+          "rotation_axis_tail": "IXXXIXIYXXI",
+          "rotation_axis_full_pauli": "XIXXXIXIYXXI"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIZIZI",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIZIZI",
+          "source_full_pauli": "XXIIXXXXIIXX",
+          "source_tail": "XIIXXXXIIXX",
+          "rotation_axis_tail": "XIIXXXXZIYX",
+          "rotation_axis_full_pauli": "XXIIXXXXZIYX"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIZYXI",
+      "hit_bases": [
+        "X",
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIZYXI",
+          "source_full_pauli": "XIZYXIIIZZII",
+          "source_tail": "IZYXIIIZZII",
+          "rotation_axis_tail": "IZYXIIIIXXI",
+          "rotation_axis_full_pauli": "ZIZYXIIIIXXI"
+        },
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIIZYXI",
+          "source_full_pauli": "ZIZYXIIIIXXI",
+          "source_tail": "IZYXIIIIXXI",
+          "rotation_axis_tail": "IZYXIIIZZII",
+          "rotation_axis_full_pauli": "XIZYXIIIZZII"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIIZZII",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIIZZII",
+          "source_full_pauli": "XIIXXIXIIXXI",
+          "source_tail": "IIXXIXIIXXI",
+          "rotation_axis_tail": "IIXXIXIZYXI",
+          "rotation_axis_full_pauli": "XIIXXIXIZYXI"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIXIIIX",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIXIIIX",
+          "source_full_pauli": "ZYZIZXZYZIZX",
+          "source_tail": "YZIZXZYZIZX",
+          "rotation_axis_tail": "YZIZXZZZIZI",
+          "rotation_axis_full_pauli": "ZYZIZXZZZIZI"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIXXIII",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIXXIII",
+          "source_full_pauli": "ZYXZZIZYXZZI",
+          "source_tail": "YXZZIZYXZZI",
+          "rotation_axis_tail": "YXZZIZZIZZI",
+          "rotation_axis_full_pauli": "ZYXZZIZZIZZI"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIXXXII",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIXXXII",
+          "source_full_pauli": "ZXXYZZZXXYZZ",
+          "source_tail": "XXYZZZXXYZZ",
+          "rotation_axis_tail": "XXYZZZIIZZZ",
+          "rotation_axis_full_pauli": "ZXXYZZZIIZZZ"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIXXXIX",
+      "hit_bases": [
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIXXXIX",
+          "source_full_pauli": "ZYYYIXZYYYIX",
+          "source_tail": "YYYIXZYYYIX",
+          "rotation_axis_tail": "YYYIXZZZZII",
+          "rotation_axis_full_pauli": "ZYYYIXZZZZII"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIXXYZZ",
+      "hit_bases": [
+        "X",
+        "Z"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIXXYZZ",
+          "source_full_pauli": "XXXYZZIIIZZZ",
+          "source_tail": "XXYZZIIIZZZ",
+          "rotation_axis_tail": "XXYZZIXXXII",
+          "rotation_axis_full_pauli": "ZXXYZZIXXXII"
+        },
+        {
+          "basis": "Z",
+          "target_full": "ZIIIIIIXXYZZ",
+          "source_full_pauli": "ZXXYZZIXXXII",
+          "source_tail": "XXYZZIXXXII",
+          "rotation_axis_tail": "XXYZZIIIZZZ",
+          "rotation_axis_full_pauli": "XXXYZZIIIZZZ"
+        }
+      ]
+    },
+    {
+      "tail11": "IIIIIIZIIIZ",
+      "hit_bases": [
+        "X"
+      ],
+      "witnesses": [
+        {
+          "basis": "X",
+          "target_full": "XIIIIIIZIIIZ",
+          "source_full_pauli": "XIXIXXXIXIXX",
+          "source_tail": "IXIXXXIXIXX",
+          "rotation_axis_tail": "IXIXXXZXIXY",
+          "rotation_axis_full_pauli": "XIXIXXXZXIXY"
+        }
+      ]
+    }
+  ],
+  "sample_misses": [
+    {
+      "tail11": "IIIIIIIIIIX",
+      "candidates": {
+        "X": "XIIIIIIIIIIX",
+        "Y": "YIIIIIIIIIIX",
+        "Z": "ZIIIIIIIIIIX"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIIY",
+      "candidates": {
+        "X": "XIIIIIIIIIIY",
+        "Y": "YIIIIIIIIIIY",
+        "Z": "ZIIIIIIIIIIY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIIZ",
+      "candidates": {
+        "X": "XIIIIIIIIIIZ",
+        "Y": "YIIIIIIIIIIZ",
+        "Z": "ZIIIIIIIIIIZ"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIXX",
+      "candidates": {
+        "X": "XIIIIIIIIIXX",
+        "Y": "YIIIIIIIIIXX",
+        "Z": "ZIIIIIIIIIXX"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIXY",
+      "candidates": {
+        "X": "XIIIIIIIIIXY",
+        "Y": "YIIIIIIIIIXY",
+        "Z": "ZIIIIIIIIIXY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIXZ",
+      "candidates": {
+        "X": "XIIIIIIIIIXZ",
+        "Y": "YIIIIIIIIIXZ",
+        "Z": "ZIIIIIIIIIXZ"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIYI",
+      "candidates": {
+        "X": "XIIIIIIIIIYI",
+        "Y": "YIIIIIIIIIYI",
+        "Z": "ZIIIIIIIIIYI"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIYX",
+      "candidates": {
+        "X": "XIIIIIIIIIYX",
+        "Y": "YIIIIIIIIIYX",
+        "Z": "ZIIIIIIIIIYX"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIYY",
+      "candidates": {
+        "X": "XIIIIIIIIIYY",
+        "Y": "YIIIIIIIIIYY",
+        "Z": "ZIIIIIIIIIYY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIYZ",
+      "candidates": {
+        "X": "XIIIIIIIIIYZ",
+        "Y": "YIIIIIIIIIYZ",
+        "Z": "ZIIIIIIIIIYZ"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIZX",
+      "candidates": {
+        "X": "XIIIIIIIIIZX",
+        "Y": "YIIIIIIIIIZX",
+        "Z": "ZIIIIIIIIIZX"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIZY",
+      "candidates": {
+        "X": "XIIIIIIIIIZY",
+        "Y": "YIIIIIIIIIZY",
+        "Z": "ZIIIIIIIIIZY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXIX",
+      "candidates": {
+        "X": "XIIIIIIIIXIX",
+        "Y": "YIIIIIIIIXIX",
+        "Z": "ZIIIIIIIIXIX"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXIY",
+      "candidates": {
+        "X": "XIIIIIIIIXIY",
+        "Y": "YIIIIIIIIXIY",
+        "Z": "ZIIIIIIIIXIY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXIZ",
+      "candidates": {
+        "X": "XIIIIIIIIXIZ",
+        "Y": "YIIIIIIIIXIZ",
+        "Z": "ZIIIIIIIIXIZ"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXXX",
+      "candidates": {
+        "X": "XIIIIIIIIXXX",
+        "Y": "YIIIIIIIIXXX",
+        "Z": "ZIIIIIIIIXXX"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXXY",
+      "candidates": {
+        "X": "XIIIIIIIIXXY",
+        "Y": "YIIIIIIIIXXY",
+        "Z": "ZIIIIIIIIXXY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXXZ",
+      "candidates": {
+        "X": "XIIIIIIIIXXZ",
+        "Y": "YIIIIIIIIXXZ",
+        "Z": "ZIIIIIIIIXXZ"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXYI",
+      "candidates": {
+        "X": "XIIIIIIIIXYI",
+        "Y": "YIIIIIIIIXYI",
+        "Z": "ZIIIIIIIIXYI"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIXYX",
+      "candidates": {
+        "X": "XIIIIIIIIXYX",
+        "Y": "YIIIIIIIIXYX",
+        "Z": "ZIIIIIIIIXYX"
+      }
+    }
+  ]
+}

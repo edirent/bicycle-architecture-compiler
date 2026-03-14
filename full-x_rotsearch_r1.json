@@ -1,0 +1,184 @@
+{
+  "raw_rows": 540,
+  "unique_native_count": 540,
+  "pivot_index": 0,
+  "family": "full-x",
+  "alphabet": [
+    "I",
+    "X"
+  ],
+  "max_rot": 1,
+  "enable_c2_fallback": true,
+  "native_tail_bucket_sizes": {
+    "X": 112,
+    "Y": 32,
+    "Z": 112
+  },
+  "native_rotation_axis_count": 245,
+  "c2_candidate_count": 73305,
+  "commuting_pairs": 93690,
+  "anti_commuting_pairs": 51840,
+  "total_targets": 2048,
+  "direct_hits": 36,
+  "rot_only_hits": 57,
+  "c2_fallback_hits": 1303,
+  "one_measure_hits": 93,
+  "overall_hits": 1396,
+  "misses": 652,
+  "direct_hit_rate_percent": 1.7578125,
+  "rot_only_hit_rate_percent": 2.783203125,
+  "one_measure_hit_rate_percent": 4.541015625,
+  "c2_fallback_hit_rate_percent": 63.623046875,
+  "overall_hit_rate_percent": 68.1640625,
+  "direct_by_basis": {
+    "X": 36,
+    "Y": 2,
+    "Z": 2
+  },
+  "rot_by_basis": {
+    "X": 33,
+    "Y": 15,
+    "Z": 39
+  },
+  "c2_by_basis": {
+    "X": 1303,
+    "Y": 69,
+    "Z": 65
+  },
+  "rot_depth_hist": {
+    "1": 57
+  },
+  "sample_direct_hits": [
+    {
+      "tail11": "IIIIIIIIIII",
+      "options": [
+        {
+          "basis": "X",
+          "full_pauli": "XIIIIIIIIIII"
+        },
+        {
+          "basis": "Y",
+          "full_pauli": "YIIIIIIIIIII"
+        },
+        {
+          "basis": "Z",
+          "full_pauli": "ZIIIIIIIIIII"
+        }
+      ]
+    }
+  ],
+  "sample_rot_hits": [
+    {
+      "tail11": "IIIIIIIIIXI",
+      "best_depth": 1,
+      "options": [
+        {
+          "basis": "Z",
+          "full_pauli": "ZIIIIIIIIIXI",
+          "rot_depth": 1
+        }
+      ]
+    }
+  ],
+  "sample_c2_hits": [
+    {
+      "tail11": "IIIIIIIIIIX",
+      "options": [
+        {
+          "basis": "X",
+          "full_pauli": "XIIIIIIIIIIX",
+          "witnesses": [
+            {
+              "left_pauli": "IIIIIIIIIIIX",
+              "right_pauli": "XIIIIIIIIIII",
+              "left_witness": {
+                "dx": "2",
+                "dy": "4",
+                "p1": "I",
+                "p7": "X",
+                "block0": "IIIIII",
+                "block1": "IIIIIX",
+                "full_pauli": "IIIIIIIIIIIX"
+              },
+              "right_witness": {
+                "dx": "0",
+                "dy": "0",
+                "p1": "X",
+                "p7": "I",
+                "block0": "XIIIII",
+                "block1": "IIIIII",
+                "full_pauli": "XIIIIIIIIIII"
+              }
+            }
+          ]
+        },
+        {
+          "basis": "Y",
+          "full_pauli": "YIIIIIIIIIIX",
+          "witnesses": [
+            {
+              "left_pauli": "IIIIIIIIIIIX",
+              "right_pauli": "YIIIIIIIIIII",
+              "left_witness": {
+                "dx": "2",
+                "dy": "4",
+                "p1": "I",
+                "p7": "X",
+                "block0": "IIIIII",
+                "block1": "IIIIIX",
+                "full_pauli": "IIIIIIIIIIIX"
+              },
+              "right_witness": {
+                "dx": "0",
+                "dy": "0",
+                "p1": "Y",
+                "p7": "I",
+                "block0": "YIIIII",
+                "block1": "IIIIII",
+                "full_pauli": "YIIIIIIIIIII"
+              }
+            }
+          ]
+        },
+        {
+          "basis": "Z",
+          "full_pauli": "ZIIIIIIIIIIX",
+          "witnesses": [
+            {
+              "left_pauli": "IIIIIIIIIIIX",
+              "right_pauli": "ZIIIIIIIIIII",
+              "left_witness": {
+                "dx": "2",
+                "dy": "4",
+                "p1": "I",
+                "p7": "X",
+                "block0": "IIIIII",
+                "block1": "IIIIIX",
+                "full_pauli": "IIIIIIIIIIIX"
+              },
+              "right_witness": {
+                "dx": "0",
+                "dy": "0",
+                "p1": "Z",
+                "p7": "I",
+                "block0": "ZIIIII",
+                "block1": "IIIIII",
+                "full_pauli": "ZIIIIIIIIIII"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sample_misses": [
+    {
+      "tail11": "IIIIIIIIIXX",
+      "candidates": {
+        "X": "XIIIIIIIIIXX",
+        "Y": "YIIIIIIIIIXX",
+        "Z": "ZIIIIIIIIIXX"
+      }
+    }
+  ]
+}

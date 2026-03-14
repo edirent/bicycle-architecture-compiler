@@ -1,0 +1,1237 @@
+{
+  "raw_rows": 540,
+  "unique_native_count": 540,
+  "c2_count": 73305,
+  "commuting_pairs": 93690,
+  "anti_commuting_pairs": 51840,
+  "pivot_index": 0,
+  "family": "full-y",
+  "alphabet": [
+    "I",
+    "Y"
+  ],
+  "total_targets": 2048,
+  "direct_hits": 2,
+  "c2_only_hits": 54,
+  "combined_hits": 56,
+  "misses": 1992,
+  "direct_hit_rate_percent": 0.09765625,
+  "c2_only_hit_rate_percent": 2.63671875,
+  "combined_hit_rate_percent": 2.734375,
+  "direct_by_basis": {
+    "X": 2,
+    "Y": 2,
+    "Z": 2
+  },
+  "c2_by_basis": {
+    "X": 15,
+    "Y": 42,
+    "Z": 15
+  },
+  "sample_direct_hits": [
+    {
+      "tail11": "IIIIIIIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIIIIIIIII",
+        "YIIIIIIIIIII",
+        "ZIIIIIIIIIII"
+      ]
+    },
+    {
+      "tail11": "IIIIIYIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIIIYIIIII",
+        "YIIIIIYIIIII",
+        "ZIIIIIYIIIII"
+      ]
+    }
+  ],
+  "sample_c2_hits": [
+    {
+      "tail11": "IIIIYIIIIII",
+      "hit_bases": [
+        "X",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIIYIIIIII",
+        "ZIIIIYIIIIII"
+      ],
+      "witnesses": {
+        "XIIIIYIIIIII": [
+          {
+            "left_pauli": "IXXXXYIIIIII",
+            "right_pauli": "XXXXXIIIIIII",
+            "left_witness": {
+              "dx": "3",
+              "dy": "5",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "IXXXXY",
+              "block1": "IIIIII",
+              "full_pauli": "IXXXXYIIIIII"
+            },
+            "right_witness": {
+              "dx": "4",
+              "dy": "1",
+              "p1": "X",
+              "p7": "I",
+              "block0": "XXXXXI",
+              "block1": "IIIIII",
+              "full_pauli": "XXXXXIIIIIII"
+            }
+          }
+        ],
+        "ZIIIIYIIIIII": [
+          {
+            "left_pauli": "IIXIIIIIIIII",
+            "right_pauli": "ZIXIIYIIIIII",
+            "left_witness": {
+              "dx": "1",
+              "dy": "1",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IIXIII",
+              "block1": "IIIIII",
+              "full_pauli": "IIXIIIIIIIII"
+            },
+            "right_witness": {
+              "dx": "0",
+              "dy": "1",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "ZIXIIY",
+              "block1": "IIIIII",
+              "full_pauli": "ZIXIIYIIIIII"
+            }
+          },
+          {
+            "left_pauli": "IZZIZYIIIIII",
+            "right_pauli": "ZZZIZIIIIIII",
+            "left_witness": {
+              "dx": "2",
+              "dy": "4",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "IZZIZY",
+              "block1": "IIIIII",
+              "full_pauli": "IZZIZYIIIIII"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "4",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "ZZZIZI",
+              "block1": "IIIIII",
+              "full_pauli": "ZZZIZIIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIIIYIIYIII",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIIIIYIIYIII"
+      ],
+      "witnesses": {
+        "ZIIIIYIIYIII": [
+          {
+            "left_pauli": "IIXIIIZIYIIZ",
+            "right_pauli": "ZIXIIYZIIIIZ",
+            "left_witness": {
+              "dx": "1",
+              "dy": "1",
+              "p1": "X",
+              "p7": "Y",
+              "block0": "IIXIII",
+              "block1": "ZIYIIZ",
+              "full_pauli": "IIXIIIZIYIIZ"
+            },
+            "right_witness": {
+              "dx": "0",
+              "dy": "1",
+              "p1": "Y",
+              "p7": "Z",
+              "block0": "ZIXIIY",
+              "block1": "ZIIIIZ",
+              "full_pauli": "ZIXIIYZIIIIZ"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIIYIIIIIII",
+      "hit_bases": [
+        "X",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIIYIIIIIII",
+        "ZIIIYIIIIIII"
+      ],
+      "witnesses": {
+        "XIIIYIIIIIII": [
+          {
+            "left_pauli": "IXIIIIIIIIII",
+            "right_pauli": "XXIIYIIIIIII",
+            "left_witness": {
+              "dx": "3",
+              "dy": "1",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IXIIII",
+              "block1": "IIIIII",
+              "full_pauli": "IXIIIIIIIIII"
+            },
+            "right_witness": {
+              "dx": "5",
+              "dy": "5",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "XXIIYI",
+              "block1": "IIIIII",
+              "full_pauli": "XXIIYIIIIIII"
+            }
+          }
+        ],
+        "ZIIIYIIIIIII": [
+          {
+            "left_pauli": "IIZZIIIIIIII",
+            "right_pauli": "ZIZZYIIIIIII",
+            "left_witness": {
+              "dx": "0",
+              "dy": "4",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "IIZZII",
+              "block1": "IIIIII",
+              "full_pauli": "IIZZIIIIIIII"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "2",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "ZIZZYI",
+              "block1": "IIIIII",
+              "full_pauli": "ZIZZYIIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIYIYIIIIII",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIIYIYIIIIII"
+      ],
+      "witnesses": {
+        "ZIIYIYIIIIII": [
+          {
+            "left_pauli": "IIIXIXIIIIII",
+            "right_pauli": "ZIIZIZIIIIII",
+            "left_witness": {
+              "dx": "5",
+              "dy": "0",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IIIXIX",
+              "block1": "IIIIII",
+              "full_pauli": "IIIXIXIIIIII"
+            },
+            "right_witness": {
+              "dx": "2",
+              "dy": "1",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "ZIIZIZ",
+              "block1": "IIIIII",
+              "full_pauli": "ZIIZIZIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIYIYYIIYIY",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIIYIYYIIYIY"
+      ],
+      "witnesses": {
+        "YIIYIYYIIYIY": [
+          {
+            "left_pauli": "XIIXIXXIIXIX",
+            "right_pauli": "ZIIZIZZIIZIZ",
+            "left_witness": {
+              "dx": "1",
+              "dy": "3",
+              "p1": "X",
+              "p7": "X",
+              "block0": "XIIXIX",
+              "block1": "XIIXIX",
+              "full_pauli": "XIIXIXXIIXIX"
+            },
+            "right_witness": {
+              "dx": "2",
+              "dy": "1",
+              "p1": "Z",
+              "p7": "Z",
+              "block0": "ZIIZIZ",
+              "block1": "ZIIZIZ",
+              "full_pauli": "ZIIZIZZIIZIZ"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIYYIIIIIII",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIIYYIIIIIII"
+      ],
+      "witnesses": {
+        "YIIYYIIIIIII": [
+          {
+            "left_pauli": "XIZYXIIIIIII",
+            "right_pauli": "ZIZIZIIIIIII",
+            "left_witness": {
+              "dx": "0",
+              "dy": "4",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "XIZYXI",
+              "block1": "IIIIII",
+              "full_pauli": "XIZYXIIIIIII"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "3",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "ZIZIZI",
+              "block1": "IIIIII",
+              "full_pauli": "ZIZIZIIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIYYIYIIYYI",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIIYYIYIIYYI"
+      ],
+      "witnesses": {
+        "YIIYYIYIIYYI": [
+          {
+            "left_pauli": "XIZYXIXIZYXI",
+            "right_pauli": "ZIZIZIZIZIZI",
+            "left_witness": {
+              "dx": "0",
+              "dy": "4",
+              "p1": "Y",
+              "p7": "Y",
+              "block0": "XIZYXI",
+              "block1": "XIZYXI",
+              "full_pauli": "XIZYXIXIZYXI"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "3",
+              "p1": "Z",
+              "p7": "Z",
+              "block0": "ZIZIZI",
+              "block1": "ZIZIZI",
+              "full_pauli": "ZIZIZIZIZIZI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIYYYIIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIIYYYIIIIII",
+        "YIIYYYIIIIII",
+        "ZIIYYYIIIIII"
+      ],
+      "witnesses": {
+        "XIIYYYIIIIII": [
+          {
+            "left_pauli": "IXXIXXIIIIII",
+            "right_pauli": "XXXYZZIIIIII",
+            "left_witness": {
+              "dx": "4",
+              "dy": "2",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IXXIXX",
+              "block1": "IIIIII",
+              "full_pauli": "IXXIXXIIIIII"
+            },
+            "right_witness": {
+              "dx": "4",
+              "dy": "0",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "XXXYZZ",
+              "block1": "IIIIII",
+              "full_pauli": "XXXYZZIIIIII"
+            }
+          },
+          {
+            "left_pauli": "IZIIIIIIIIII",
+            "right_pauli": "XZIYYYIIIIII",
+            "left_witness": {
+              "dx": "4",
+              "dy": "2",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "IZIIII",
+              "block1": "IIIIII",
+              "full_pauli": "IZIIIIIIIIII"
+            },
+            "right_witness": {
+              "dx": "4",
+              "dy": "4",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "XZIYYY",
+              "block1": "IIIIII",
+              "full_pauli": "XZIYYYIIIIII"
+            }
+          }
+        ],
+        "YIIYYYIIIIII": [
+          {
+            "left_pauli": "XIIXXXIIIIII",
+            "right_pauli": "ZIIZZZIIIIII",
+            "left_witness": {
+              "dx": "4",
+              "dy": "4",
+              "p1": "X",
+              "p7": "I",
+              "block0": "XIIXXX",
+              "block1": "IIIIII",
+              "full_pauli": "XIIXXXIIIIII"
+            },
+            "right_witness": {
+              "dx": "2",
+              "dy": "0",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "ZIIZZZ",
+              "block1": "IIIIII",
+              "full_pauli": "ZIIZZZIIIIII"
+            }
+          }
+        ],
+        "ZIIYYYIIIIII": [
+          {
+            "left_pauli": "IXXIXXIIIIII",
+            "right_pauli": "ZXXYZZIIIIII",
+            "left_witness": {
+              "dx": "4",
+              "dy": "2",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IXXIXX",
+              "block1": "IIIIII",
+              "full_pauli": "IXXIXXIIIIII"
+            },
+            "right_witness": {
+              "dx": "2",
+              "dy": "0",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "ZXXYZZ",
+              "block1": "IIIIII",
+              "full_pauli": "ZXXYZZIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IIYYYYIIYYY",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIIYYYYIIYYY"
+      ],
+      "witnesses": {
+        "YIIYYYYIIYYY": [
+          {
+            "left_pauli": "XIIXXXXIIXXX",
+            "right_pauli": "ZIIZZZZIIZZZ",
+            "left_witness": {
+              "dx": "4",
+              "dy": "4",
+              "p1": "X",
+              "p7": "X",
+              "block0": "XIIXXX",
+              "block1": "XIIXXX",
+              "full_pauli": "XIIXXXXIIXXX"
+            },
+            "right_witness": {
+              "dx": "2",
+              "dy": "0",
+              "p1": "Z",
+              "p7": "Z",
+              "block0": "ZIIZZZ",
+              "block1": "ZIIZZZ",
+              "full_pauli": "ZIIZZZZIIZZZ"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIIIIIIIII",
+      "hit_bases": [
+        "X",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIYIIIIIIIII",
+        "ZIYIIIIIIIII"
+      ],
+      "witnesses": {
+        "XIYIIIIIIIII": [
+          {
+            "left_pauli": "IIIXXIIIIIII",
+            "right_pauli": "XIYXXIIIIIII",
+            "left_witness": {
+              "dx": "0",
+              "dy": "2",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IIIXXI",
+              "block1": "IIIIII",
+              "full_pauli": "IIIXXIIIIIII"
+            },
+            "right_witness": {
+              "dx": "5",
+              "dy": "4",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "XIYXXI",
+              "block1": "IIIIII",
+              "full_pauli": "XIYXXIIIIIII"
+            }
+          }
+        ],
+        "ZIYIIIIIIIII": [
+          {
+            "left_pauli": "IIIIIZIIIIII",
+            "right_pauli": "ZIYIIZIIIIII",
+            "left_witness": {
+              "dx": "3",
+              "dy": "5",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "IIIIIZ",
+              "block1": "IIIIII",
+              "full_pauli": "IIIIIZIIIIII"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "1",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "ZIYIIZ",
+              "block1": "IIIIII",
+              "full_pauli": "ZIYIIZIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIIYIIIIII",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIYIIYIIIIII"
+      ],
+      "witnesses": {
+        "ZIYIIYIIIIII": [
+          {
+            "left_pauli": "IIXIIXIIIIII",
+            "right_pauli": "ZIZIIZIIIIII",
+            "left_witness": {
+              "dx": "0",
+              "dy": "1",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IIXIIX",
+              "block1": "IIIIII",
+              "full_pauli": "IIXIIXIIIIII"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "1",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "ZIZIIZ",
+              "block1": "IIIIII",
+              "full_pauli": "ZIZIIZIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIIYIIYIII",
+      "hit_bases": [
+        "Z"
+      ],
+      "full_paulis": [
+        "ZIYIIYIIYIII"
+      ],
+      "witnesses": {
+        "ZIYIIYIIYIII": [
+          {
+            "left_pauli": "IIXIIXZIIIIZ",
+            "right_pauli": "ZIZIIZZIYIIZ",
+            "left_witness": {
+              "dx": "0",
+              "dy": "1",
+              "p1": "X",
+              "p7": "Z",
+              "block0": "IIXIIX",
+              "block1": "ZIIIIZ",
+              "full_pauli": "IIXIIXZIIIIZ"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "1",
+              "p1": "Z",
+              "p7": "Y",
+              "block0": "ZIZIIZ",
+              "block1": "ZIYIIZ",
+              "full_pauli": "ZIZIIZZIYIIZ"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIIYYIYIIY",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIYIIYYIYIIY"
+      ],
+      "witnesses": {
+        "YIYIIYYIYIIY": [
+          {
+            "left_pauli": "XIXIIXXIXIIX",
+            "right_pauli": "ZIZIIZZIZIIZ",
+            "left_witness": {
+              "dx": "3",
+              "dy": "2",
+              "p1": "X",
+              "p7": "X",
+              "block0": "XIXIIX",
+              "block1": "XIXIIX",
+              "full_pauli": "XIXIIXXIXIIX"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "1",
+              "p1": "Z",
+              "p7": "Z",
+              "block0": "ZIZIIZ",
+              "block1": "ZIZIIZ",
+              "full_pauli": "ZIZIIZZIZIIZ"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIYIIIIIII",
+      "hit_bases": [
+        "X",
+        "Y",
+        "Z"
+      ],
+      "full_paulis": [
+        "XIYIYIIIIIII",
+        "YIYIYIIIIIII",
+        "ZIYIYIIIIIII"
+      ],
+      "witnesses": {
+        "XIYIYIIIIIII": [
+          {
+            "left_pauli": "IIZIZIIIIIII",
+            "right_pauli": "XIXIXIIIIIII",
+            "left_witness": {
+              "dx": "2",
+              "dy": "3",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "IIZIZI",
+              "block1": "IIIIII",
+              "full_pauli": "IIZIZIIIIIII"
+            },
+            "right_witness": {
+              "dx": "5",
+              "dy": "3",
+              "p1": "X",
+              "p7": "I",
+              "block0": "XIXIXI",
+              "block1": "IIIIII",
+              "full_pauli": "XIXIXIIIIIII"
+            }
+          },
+          {
+            "left_pauli": "IXZYXZIIIIII",
+            "right_pauli": "XXXYZZIIIIII",
+            "left_witness": {
+              "dx": "3",
+              "dy": "0",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "IXZYXZ",
+              "block1": "IIIIII",
+              "full_pauli": "IXZYXZIIIIII"
+            },
+            "right_witness": {
+              "dx": "4",
+              "dy": "0",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "XXXYZZ",
+              "block1": "IIIIII",
+              "full_pauli": "XXXYZZIIIIII"
+            }
+          }
+        ],
+        "YIYIYIIIIIII": [
+          {
+            "left_pauli": "IIXXXXIIIIII",
+            "right_pauli": "YIZXZXIIIIII",
+            "left_witness": {
+              "dx": "3",
+              "dy": "3",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IIXXXX",
+              "block1": "IIIIII",
+              "full_pauli": "IIXXXXIIIIII"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "3",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "YIZXZX",
+              "block1": "IIIIII",
+              "full_pauli": "YIZXZXIIIIII"
+            }
+          },
+          {
+            "left_pauli": "IZZZZIIIIIII",
+            "right_pauli": "YZXZXIIIIIII",
+            "left_witness": {
+              "dx": "3",
+              "dy": "3",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "IZZZZI",
+              "block1": "IIIIII",
+              "full_pauli": "IZZZZIIIIIII"
+            },
+            "right_witness": {
+              "dx": "5",
+              "dy": "3",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "YZXZXI",
+              "block1": "IIIIII",
+              "full_pauli": "YZXZXIIIIIII"
+            }
+          }
+        ],
+        "ZIYIYIIIIIII": [
+          {
+            "left_pauli": "IIXIXIIIIIII",
+            "right_pauli": "ZIZIZIIIIIII",
+            "left_witness": {
+              "dx": "4",
+              "dy": "3",
+              "p1": "X",
+              "p7": "I",
+              "block0": "IIXIXI",
+              "block1": "IIIIII",
+              "full_pauli": "IIXIXIIIIIII"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "3",
+              "p1": "Z",
+              "p7": "I",
+              "block0": "ZIZIZI",
+              "block1": "IIIIII",
+              "full_pauli": "ZIZIZIIIIIII"
+            }
+          },
+          {
+            "left_pauli": "IXZYXZIIIIII",
+            "right_pauli": "ZXXYZZIIIIII",
+            "left_witness": {
+              "dx": "3",
+              "dy": "0",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "IXZYXZ",
+              "block1": "IIIIII",
+              "full_pauli": "IXZYXZIIIIII"
+            },
+            "right_witness": {
+              "dx": "2",
+              "dy": "0",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "ZXXYZZ",
+              "block1": "IIIIII",
+              "full_pauli": "ZXXYZZIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIYIYIYIYI",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIYIYIYIYIYI"
+      ],
+      "witnesses": {
+        "YIYIYIYIYIYI": [
+          {
+            "left_pauli": "IIXXXXIIXXXX",
+            "right_pauli": "YIZXZXYIZXZX",
+            "left_witness": {
+              "dx": "3",
+              "dy": "3",
+              "p1": "X",
+              "p7": "X",
+              "block0": "IIXXXX",
+              "block1": "IIXXXX",
+              "full_pauli": "IIXXXXIIXXXX"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "3",
+              "p1": "Y",
+              "p7": "Y",
+              "block0": "YIZXZX",
+              "block1": "YIZXZX",
+              "full_pauli": "YIZXZXYIZXZX"
+            }
+          },
+          {
+            "left_pauli": "IZZZZIIZZZZI",
+            "right_pauli": "YZXZXIYZXZXI",
+            "left_witness": {
+              "dx": "3",
+              "dy": "3",
+              "p1": "Z",
+              "p7": "Z",
+              "block0": "IZZZZI",
+              "block1": "IZZZZI",
+              "full_pauli": "IZZZZIIZZZZI"
+            },
+            "right_witness": {
+              "dx": "5",
+              "dy": "3",
+              "p1": "Y",
+              "p7": "Y",
+              "block0": "YZXZXI",
+              "block1": "YZXZXI",
+              "full_pauli": "YZXZXIYZXZXI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIYYYIYIYY",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIYIYYYIYIYY"
+      ],
+      "witnesses": {
+        "YIYIYYYIYIYY": [
+          {
+            "left_pauli": "XZXIXYXZXIXY",
+            "right_pauli": "ZZZIZIZZZIZI",
+            "left_witness": {
+              "dx": "5",
+              "dy": "2",
+              "p1": "Y",
+              "p7": "Y",
+              "block0": "XZXIXY",
+              "block1": "XZXIXY",
+              "full_pauli": "XZXIXYXZXIXY"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "4",
+              "p1": "Z",
+              "p7": "Z",
+              "block0": "ZZZIZI",
+              "block1": "ZZZIZI",
+              "full_pauli": "ZZZIZIZZZIZI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYIYYYYYIYI",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIYIYYYYYIYI"
+      ],
+      "witnesses": {
+        "YIYIYYYYYIYI": [
+          {
+            "left_pauli": "XZXIXYXIXIXX",
+            "right_pauli": "ZZZIZIZYZIZX",
+            "left_witness": {
+              "dx": "5",
+              "dy": "2",
+              "p1": "Y",
+              "p7": "X",
+              "block0": "XZXIXY",
+              "block1": "XIXIXX",
+              "full_pauli": "XZXIXYXIXIXX"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "4",
+              "p1": "Z",
+              "p7": "Y",
+              "block0": "ZZZIZI",
+              "block1": "ZYZIZX",
+              "full_pauli": "ZZZIZIZYZIZX"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYYIIIIIIII",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIYYIIIIIIII"
+      ],
+      "witnesses": {
+        "YIYYIIIIIIII": [
+          {
+            "left_pauli": "XIXIXIIIIIII",
+            "right_pauli": "ZIZYXIIIIIII",
+            "left_witness": {
+              "dx": "5",
+              "dy": "3",
+              "p1": "X",
+              "p7": "I",
+              "block0": "XIXIXI",
+              "block1": "IIIIII",
+              "full_pauli": "XIXIXIIIIIII"
+            },
+            "right_witness": {
+              "dx": "0",
+              "dy": "2",
+              "p1": "Y",
+              "p7": "I",
+              "block0": "ZIZYXI",
+              "block1": "IIIIII",
+              "full_pauli": "ZIZYXIIIIIII"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYYIIYIYYII",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIYYIIYIYYII"
+      ],
+      "witnesses": {
+        "YIYYIIYIYYII": [
+          {
+            "left_pauli": "XIXIXIXIXIXI",
+            "right_pauli": "ZIZYXIZIZYXI",
+            "left_witness": {
+              "dx": "5",
+              "dy": "3",
+              "p1": "X",
+              "p7": "X",
+              "block0": "XIXIXI",
+              "block1": "XIXIXI",
+              "full_pauli": "XIXIXIXIXIXI"
+            },
+            "right_witness": {
+              "dx": "0",
+              "dy": "2",
+              "p1": "Y",
+              "p7": "Y",
+              "block0": "ZIZYXI",
+              "block1": "ZIZYXI",
+              "full_pauli": "ZIZYXIZIZYXI"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "tail11": "IYYIYYIYYIY",
+      "hit_bases": [
+        "Y"
+      ],
+      "full_paulis": [
+        "YIYYIYYIYYIY"
+      ],
+      "witnesses": {
+        "YIYYIYYIYYIY": [
+          {
+            "left_pauli": "XIXXZYXIXXZY",
+            "right_pauli": "ZIZZZIZIZZZI",
+            "left_witness": {
+              "dx": "1",
+              "dy": "5",
+              "p1": "Y",
+              "p7": "Y",
+              "block0": "XIXXZY",
+              "block1": "XIXXZY",
+              "full_pauli": "XIXXZYXIXXZY"
+            },
+            "right_witness": {
+              "dx": "1",
+              "dy": "2",
+              "p1": "Z",
+              "p7": "Z",
+              "block0": "ZIZZZI",
+              "block1": "ZIZZZI",
+              "full_pauli": "ZIZZZIZIZZZI"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "sample_misses": [
+    {
+      "tail11": "IIIIIIIIIIY",
+      "candidates": {
+        "X": "XIIIIIIIIIIY",
+        "Y": "YIIIIIIIIIIY",
+        "Z": "ZIIIIIIIIIIY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIYI",
+      "candidates": {
+        "X": "XIIIIIIIIIYI",
+        "Y": "YIIIIIIIIIYI",
+        "Z": "ZIIIIIIIIIYI"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIIYY",
+      "candidates": {
+        "X": "XIIIIIIIIIYY",
+        "Y": "YIIIIIIIIIYY",
+        "Z": "ZIIIIIIIIIYY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIYII",
+      "candidates": {
+        "X": "XIIIIIIIIYII",
+        "Y": "YIIIIIIIIYII",
+        "Z": "ZIIIIIIIIYII"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIYIY",
+      "candidates": {
+        "X": "XIIIIIIIIYIY",
+        "Y": "YIIIIIIIIYIY",
+        "Z": "ZIIIIIIIIYIY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIYYI",
+      "candidates": {
+        "X": "XIIIIIIIIYYI",
+        "Y": "YIIIIIIIIYYI",
+        "Z": "ZIIIIIIIIYYI"
+      }
+    },
+    {
+      "tail11": "IIIIIIIIYYY",
+      "candidates": {
+        "X": "XIIIIIIIIYYY",
+        "Y": "YIIIIIIIIYYY",
+        "Z": "ZIIIIIIIIYYY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYIII",
+      "candidates": {
+        "X": "XIIIIIIIYIII",
+        "Y": "YIIIIIIIYIII",
+        "Z": "ZIIIIIIIYIII"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYIIY",
+      "candidates": {
+        "X": "XIIIIIIIYIIY",
+        "Y": "YIIIIIIIYIIY",
+        "Z": "ZIIIIIIIYIIY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYIYI",
+      "candidates": {
+        "X": "XIIIIIIIYIYI",
+        "Y": "YIIIIIIIYIYI",
+        "Z": "ZIIIIIIIYIYI"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYIYY",
+      "candidates": {
+        "X": "XIIIIIIIYIYY",
+        "Y": "YIIIIIIIYIYY",
+        "Z": "ZIIIIIIIYIYY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYYII",
+      "candidates": {
+        "X": "XIIIIIIIYYII",
+        "Y": "YIIIIIIIYYII",
+        "Z": "ZIIIIIIIYYII"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYYIY",
+      "candidates": {
+        "X": "XIIIIIIIYYIY",
+        "Y": "YIIIIIIIYYIY",
+        "Z": "ZIIIIIIIYYIY"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYYYI",
+      "candidates": {
+        "X": "XIIIIIIIYYYI",
+        "Y": "YIIIIIIIYYYI",
+        "Z": "ZIIIIIIIYYYI"
+      }
+    },
+    {
+      "tail11": "IIIIIIIYYYY",
+      "candidates": {
+        "X": "XIIIIIIIYYYY",
+        "Y": "YIIIIIIIYYYY",
+        "Z": "ZIIIIIIIYYYY"
+      }
+    },
+    {
+      "tail11": "IIIIIIYIIII",
+      "candidates": {
+        "X": "XIIIIIIYIIII",
+        "Y": "YIIIIIIYIIII",
+        "Z": "ZIIIIIIYIIII"
+      }
+    },
+    {
+      "tail11": "IIIIIIYIIIY",
+      "candidates": {
+        "X": "XIIIIIIYIIIY",
+        "Y": "YIIIIIIYIIIY",
+        "Z": "ZIIIIIIYIIIY"
+      }
+    },
+    {
+      "tail11": "IIIIIIYIIYI",
+      "candidates": {
+        "X": "XIIIIIIYIIYI",
+        "Y": "YIIIIIIYIIYI",
+        "Z": "ZIIIIIIYIIYI"
+      }
+    },
+    {
+      "tail11": "IIIIIIYIIYY",
+      "candidates": {
+        "X": "XIIIIIIYIIYY",
+        "Y": "YIIIIIIYIIYY",
+        "Z": "ZIIIIIIYIIYY"
+      }
+    },
+    {
+      "tail11": "IIIIIIYIYII",
+      "candidates": {
+        "X": "XIIIIIIYIYII",
+        "Y": "YIIIIIIYIYII",
+        "Z": "ZIIIIIIYIYII"
+      }
+    }
+  ]
+}

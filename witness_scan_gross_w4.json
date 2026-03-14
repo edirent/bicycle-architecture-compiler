@@ -1,0 +1,52 @@
+{
+  "code": "gross",
+  "max_weight": 4,
+  "summary": {
+    "total_scanned": 46665,
+    "by_weight": {
+      "1": 36,
+      "2": 594,
+      "3": 5940,
+      "4": 40095
+    },
+    "native_targets": 199,
+    "total_hits": 199,
+    "trivial_self_hits": 199,
+    "nontrivial_witnesses": 0,
+    "native_set_size": 540
+  },
+  "examples": [],
+  "trivial_self_hits_first_20": [
+    "IIIIIIIIIIIX",
+    "IIIIIIIIIIIZ",
+    "IIIIIIIIIIXI",
+    "IIIIIIIIIIZI",
+    "IIIIIIIIIIZZ",
+    "IIIIIIIIIXII",
+    "IIIIIIIIIXIX",
+    "IIIIIIIIIXXI",
+    "IIIIIIIIIZII",
+    "IIIIIIIIIZZZ",
+    "IIIIIIIIXIII",
+    "IIIIIIIIXIIX",
+    "IIIIIIIIXIXI",
+    "IIIIIIIIXXXX",
+    "IIIIIIIIZIII",
+    "IIIIIIIIZIZI",
+    "IIIIIIIIZZII",
+    "IIIIIIIIZZIZ",
+    "IIIIIIIXIIII",
+    "IIIIIIIXIIIX"
+  ],
+  "method": {
+    "pairwise_scan_pruned": true,
+    "pruning_reason": "The lifted basis validates as a true logical basis modulo stabilizers, so L(q)+L(n) in rowspan(S_phys) implies q=n. Distinct target/native witness checks are therefore impossible in this regime and are pruned.",
+    "lift_basis_check_details": {
+      "logical_x_commutes_with_stabilizers": true,
+      "logical_z_commutes_with_stabilizers": true,
+      "xz_pairings_identity": true,
+      "xx_pairings_zero": true,
+      "zz_pairings_zero": true
+    }
+  }
+}

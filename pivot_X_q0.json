@@ -1,0 +1,2048 @@
+{
+  "csv": "native.csv",
+  "total_rows": 540,
+  "unique_native_count": 540,
+  "pivot_index": 0,
+  "pivot_basis": "X",
+  "bucket_summary": {
+    "bucket_size": 112,
+    "tail_first_char_bucket": {
+      "I": 48,
+      "X": 52,
+      "Y": 4,
+      "Z": 8
+    }
+  },
+  "commuting_pairs": 4034,
+  "anti_commuting_pairs": 2182,
+  "sample_commuting_pairs": [
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIIIIXIIIII",
+      "right_tail": "IIIIIXIIIII"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIIIIYIIIII",
+      "right_tail": "IIIIIYIIIII"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIIIIZIIIII",
+      "right_tail": "IIIIIZIIIII"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIXIXIIIIII",
+      "right_tail": "IIXIXIIIIII"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIXIXXIIXIX",
+      "right_tail": "IIXIXXIIXIX"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIXIXYIZXZX",
+      "right_tail": "IIXIXYIZXZX"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIXIXZIZIZI",
+      "right_tail": "IIXIXZIZIZI"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIXXIIIIIII",
+      "right_tail": "IIXXIIIIIII"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIXXIIIZZII",
+      "right_tail": "IIXXIIIZZII"
+    },
+    {
+      "left_full": "XIIIIIIIIIII",
+      "left_tail": "IIIIIIIIIII",
+      "right_full": "XIIXXIXIIXXI",
+      "right_tail": "IIXXIXIIXXI"
+    }
+  ],
+  "sample_anti_commuting_pairs": [
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIIIIIYIIIII",
+      "right_tail": "IIIIIYIIIII"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIIIIIZIIIII",
+      "right_tail": "IIIIIZIIIII"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIIXIXYIZXZX",
+      "right_tail": "IIXIXYIZXZX"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIIXIXZIZIZI",
+      "right_tail": "IIXIXZIZIZI"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIXIIXYZYZZY",
+      "right_tail": "IXIIXYZYZZY"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIXIIXZZZZZZ",
+      "right_tail": "IXIIXZZZZZZ"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIXIXIYZXZXI",
+      "right_tail": "IXIXIYZXZXI"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XIXIXIZZIZII",
+      "right_tail": "IXIXIZZIZII"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XXIXIIYYZYIZ",
+      "right_tail": "XIXIIYYZYIZ"
+    },
+    {
+      "left_full": "XIIIIIXIIIII",
+      "left_tail": "IIIIIXIIIII",
+      "right_full": "XXIXIIZZZZIZ",
+      "right_tail": "XIXIIZZZZIZ"
+    }
+  ],
+  "bucket": [
+    {
+      "full_pauli": "XIIIIIIIIIII",
+      "tail": "IIIIIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "0",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIIIII",
+          "block1": "IIIIII",
+          "full_pauli": "XIIIIIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 111
+    },
+    {
+      "full_pauli": "XIIIIIXIIIII",
+      "tail": "IIIIIXIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "0",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIIIII",
+          "block1": "XIIIII",
+          "full_pauli": "XIIIIIXIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 95
+    },
+    {
+      "full_pauli": "XIIIIIYIIIII",
+      "tail": "IIIIIYIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "0",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIIIII",
+          "block1": "YIIIII",
+          "full_pauli": "XIIIIIYIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 55
+    },
+    {
+      "full_pauli": "XIIIIIZIIIII",
+      "tail": "IIIIIZIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "0",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIIIII",
+          "block1": "ZIIIII",
+          "full_pauli": "XIIIIIZIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 55
+    },
+    {
+      "full_pauli": "XIIXIXIIIIII",
+      "tail": "IIXIXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "3",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIIXIX",
+          "block1": "IIIIII",
+          "full_pauli": "XIIXIXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 95
+    },
+    {
+      "full_pauli": "XIIXIXXIIXIX",
+      "tail": "IIXIXXIIXIX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "3",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIIXIX",
+          "block1": "XIIXIX",
+          "full_pauli": "XIIXIXXIIXIX"
+        }
+      ],
+      "degree_in_commute_graph": 83
+    },
+    {
+      "full_pauli": "XIIXIXYIZXZX",
+      "tail": "IIXIXYIZXZX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIIXIX",
+          "block1": "YIZXZX",
+          "full_pauli": "XIIXIXYIZXZX"
+        }
+      ],
+      "degree_in_commute_graph": 73
+    },
+    {
+      "full_pauli": "XIIXIXZIZIZI",
+      "tail": "IIXIXZIZIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIIXIX",
+          "block1": "ZIZIZI",
+          "full_pauli": "XIIXIXZIZIZI"
+        }
+      ],
+      "degree_in_commute_graph": 77
+    },
+    {
+      "full_pauli": "XIIXXIIIIIII",
+      "tail": "IIXXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIIXXI",
+          "block1": "IIIIII",
+          "full_pauli": "XIIXXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 87
+    },
+    {
+      "full_pauli": "XIIXXIIIZZII",
+      "tail": "IIXXIIIZZII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIIXXI",
+          "block1": "IIZZII",
+          "full_pauli": "XIIXXIIIZZII"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XIIXXIXIIXXI",
+      "tail": "IIXXIXIIXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIIXXI",
+          "block1": "XIIXXI",
+          "full_pauli": "XIIXXIXIIXXI"
+        }
+      ],
+      "degree_in_commute_graph": 83
+    },
+    {
+      "full_pauli": "XIIXXIXIZYXI",
+      "tail": "IIXXIXIZYXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIIXXI",
+          "block1": "XIZYXI",
+          "full_pauli": "XIIXXIXIZYXI"
+        }
+      ],
+      "degree_in_commute_graph": 65
+    },
+    {
+      "full_pauli": "XIIXXXIIIIII",
+      "tail": "IIXXXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIIXXX",
+          "block1": "IIIIII",
+          "full_pauli": "XIIXXXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 79
+    },
+    {
+      "full_pauli": "XIIXXXIZIZZZ",
+      "tail": "IIXXXIZIZZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIIXXX",
+          "block1": "IZIZZZ",
+          "full_pauli": "XIIXXXIZIZZZ"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XIIXXXXIIXXX",
+      "tail": "IIXXXXIIXXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIIXXX",
+          "block1": "XIIXXX",
+          "full_pauli": "XIIXXXXIIXXX"
+        }
+      ],
+      "degree_in_commute_graph": 71
+    },
+    {
+      "full_pauli": "XIIXXXXZIYYY",
+      "tail": "IIXXXXZIYYY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIIXXX",
+          "block1": "XZIYYY",
+          "full_pauli": "XIIXXXXZIYYY"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XIXIIXIIIIII",
+      "tail": "IXIIXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "2",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIXIIX",
+          "block1": "IIIIII",
+          "full_pauli": "XIXIIXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 83
+    },
+    {
+      "full_pauli": "XIXIIXXIXIIX",
+      "tail": "IXIIXXIXIIX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "2",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIXIIX",
+          "block1": "XIXIIX",
+          "full_pauli": "XIXIIXXIXIIX"
+        }
+      ],
+      "degree_in_commute_graph": 73
+    },
+    {
+      "full_pauli": "XIXIIXYZYZZY",
+      "tail": "IXIIXYZYZZY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "2",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIXIIX",
+          "block1": "YZYZZY",
+          "full_pauli": "XIXIIXYZYZZY"
+        }
+      ],
+      "degree_in_commute_graph": 61
+    },
+    {
+      "full_pauli": "XIXIIXZZZZZZ",
+      "tail": "IXIIXZZZZZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "2",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIXIIX",
+          "block1": "ZZZZZZ",
+          "full_pauli": "XIXIIXZZZZZZ"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XIXIXIIIIIII",
+      "tail": "IXIXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "3",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIXIXI",
+          "block1": "IIIIII",
+          "full_pauli": "XIXIXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 83
+    },
+    {
+      "full_pauli": "XIXIXIXIXIXI",
+      "tail": "IXIXIXIXIXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "3",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIXIXI",
+          "block1": "XIXIXI",
+          "full_pauli": "XIXIXIXIXIXI"
+        }
+      ],
+      "degree_in_commute_graph": 73
+    },
+    {
+      "full_pauli": "XIXIXIYZXZXI",
+      "tail": "IXIXIYZXZXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIXIXI",
+          "block1": "YZXZXI",
+          "full_pauli": "XIXIXIYZXZXI"
+        }
+      ],
+      "degree_in_commute_graph": 61
+    },
+    {
+      "full_pauli": "XIXIXIZZIZII",
+      "tail": "IXIXIZZIZII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIXIXI",
+          "block1": "ZZIZII",
+          "full_pauli": "XIXIXIZZIZII"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XIXIXXIIIIII",
+      "tail": "IXIXXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIXIXX",
+          "block1": "IIIIII",
+          "full_pauli": "XIXIXXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 91
+    },
+    {
+      "full_pauli": "XIXIXXIZIIIZ",
+      "tail": "IXIXXIZIIIZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIXIXX",
+          "block1": "IZIIIZ",
+          "full_pauli": "XIXIXXIZIIIZ"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XIXIXXXIXIXX",
+      "tail": "IXIXXXIXIXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIXIXX",
+          "block1": "XIXIXX",
+          "full_pauli": "XIXIXXXIXIXX"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XIXIXXXZXIXY",
+      "tail": "IXIXXXZXIXY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIXIXX",
+          "block1": "XZXIXY",
+          "full_pauli": "XIXIXXXZXIXY"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XIXXIXIIIIII",
+      "tail": "IXXIXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIXXIX",
+          "block1": "IIIIII",
+          "full_pauli": "XIXXIXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 91
+    },
+    {
+      "full_pauli": "XIXXIXIIIIZZ",
+      "tail": "IXXIXIIIIZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIXXIX",
+          "block1": "IIIIZZ",
+          "full_pauli": "XIXXIXIIIIZZ"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XIXXIXXIXXIX",
+      "tail": "IXXIXXIXXIX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIXXIX",
+          "block1": "XIXXIX",
+          "full_pauli": "XIXXIXXIXXIX"
+        }
+      ],
+      "degree_in_commute_graph": 85
+    },
+    {
+      "full_pauli": "XIXXIXXIXXZY",
+      "tail": "IXXIXXIXXZY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIXXIX",
+          "block1": "XIXXZY",
+          "full_pauli": "XIXXIXXIXXZY"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XIXXXIIIIIII",
+      "tail": "IXXXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XIXXXI",
+          "block1": "IIIIII",
+          "full_pauli": "XIXXXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 91
+    },
+    {
+      "full_pauli": "XIXXXIIIZIII",
+      "tail": "IXXXIIIZIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XIXXXI",
+          "block1": "IIZIII",
+          "full_pauli": "XIXXXIIIZIII"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XIXXXIXIXXXI",
+      "tail": "IXXXIXIXXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XIXXXI",
+          "block1": "XIXXXI",
+          "full_pauli": "XIXXXIXIXXXI"
+        }
+      ],
+      "degree_in_commute_graph": 85
+    },
+    {
+      "full_pauli": "XIXXXIXIYXXI",
+      "tail": "IXXXIXIYXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XIXXXI",
+          "block1": "XIYXXI",
+          "full_pauli": "XIXXXIXIYXXI"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XIXXZYIIIIII",
+      "tail": "IXXZYIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XIXXZY",
+          "block1": "IIIIII",
+          "full_pauli": "XIXXZYIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 59
+    },
+    {
+      "full_pauli": "XIXXZYIIIIZZ",
+      "tail": "IXXZYIIIIZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XIXXZY",
+          "block1": "IIIIZZ",
+          "full_pauli": "XIXXZYIIIIZZ"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XIXXZYXIXXIX",
+      "tail": "IXXZYXIXXIX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XIXXZY",
+          "block1": "XIXXIX",
+          "full_pauli": "XIXXZYXIXXIX"
+        }
+      ],
+      "degree_in_commute_graph": 53
+    },
+    {
+      "full_pauli": "XIXXZYXIXXZY",
+      "tail": "IXXZYXIXXZY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "1",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XIXXZY",
+          "block1": "XIXXZY",
+          "full_pauli": "XIXXZYXIXXZY"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XIYXXIIIIIII",
+      "tail": "IYXXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XIYXXI",
+          "block1": "IIIIII",
+          "full_pauli": "XIYXXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 59
+    },
+    {
+      "full_pauli": "XIYXXIIIZIII",
+      "tail": "IYXXIIIZIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XIYXXI",
+          "block1": "IIZIII",
+          "full_pauli": "XIYXXIIIZIII"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XIYXXIXIXXXI",
+      "tail": "IYXXIXIXXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XIYXXI",
+          "block1": "XIXXXI",
+          "full_pauli": "XIYXXIXIXXXI"
+        }
+      ],
+      "degree_in_commute_graph": 53
+    },
+    {
+      "full_pauli": "XIYXXIXIYXXI",
+      "tail": "IYXXIXIYXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XIYXXI",
+          "block1": "XIYXXI",
+          "full_pauli": "XIYXXIXIYXXI"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XIZYXIIIIIII",
+      "tail": "IZYXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XIZYXI",
+          "block1": "IIIIII",
+          "full_pauli": "XIZYXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 47
+    },
+    {
+      "full_pauli": "XIZYXIIIZZII",
+      "tail": "IZYXIIIZZII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XIZYXI",
+          "block1": "IIZZII",
+          "full_pauli": "XIZYXIIIZZII"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XIZYXIXIIXXI",
+      "tail": "IZYXIXIIXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XIZYXI",
+          "block1": "XIIXXI",
+          "full_pauli": "XIZYXIXIIXXI"
+        }
+      ],
+      "degree_in_commute_graph": 47
+    },
+    {
+      "full_pauli": "XIZYXIXIZYXI",
+      "tail": "IZYXIXIZYXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XIZYXI",
+          "block1": "XIZYXI",
+          "full_pauli": "XIZYXIXIZYXI"
+        }
+      ],
+      "degree_in_commute_graph": 65
+    },
+    {
+      "full_pauli": "XXIIIIIIIIII",
+      "tail": "XIIIIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXIIII",
+          "block1": "IIIIII",
+          "full_pauli": "XXIIIIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 99
+    },
+    {
+      "full_pauli": "XXIIIIIZIIZI",
+      "tail": "XIIIIIZIIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXIIII",
+          "block1": "IZIIZI",
+          "full_pauli": "XXIIIIIZIIZI"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XXIIIIXXIIII",
+      "tail": "XIIIIXXIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXIIII",
+          "block1": "XXIIII",
+          "full_pauli": "XXIIIIXXIIII"
+        }
+      ],
+      "degree_in_commute_graph": 93
+    },
+    {
+      "full_pauli": "XXIIIIXYIIZI",
+      "tail": "XIIIIXYIIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXIIII",
+          "block1": "XYIIZI",
+          "full_pauli": "XXIIIIXYIIZI"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XXIIXIIIIIII",
+      "tail": "XIIXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXIIXI",
+          "block1": "IIIIII",
+          "full_pauli": "XXIIXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 91
+    },
+    {
+      "full_pauli": "XXIIXIIIIIZI",
+      "tail": "XIIXIIIIIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXIIXI",
+          "block1": "IIIIZI",
+          "full_pauli": "XXIIXIIIIIZI"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XXIIXIXXIIXI",
+      "tail": "XIIXIXXIIXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXIIXI",
+          "block1": "XXIIXI",
+          "full_pauli": "XXIIXIXXIIXI"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XXIIXIXXIIYI",
+      "tail": "XIIXIXXIIYI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXIIXI",
+          "block1": "XXIIYI",
+          "full_pauli": "XXIIXIXXIIYI"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XXIIXXIIIIII",
+      "tail": "XIIXXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXIIXX",
+          "block1": "IIIIII",
+          "full_pauli": "XXIIXXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 99
+    },
+    {
+      "full_pauli": "XXIIXXIIZIZI",
+      "tail": "XIIXXIIZIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXIIXX",
+          "block1": "IIZIZI",
+          "full_pauli": "XXIIXXIIZIZI"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XXIIXXXXIIXX",
+      "tail": "XIIXXXXIIXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXIIXX",
+          "block1": "XXIIXX",
+          "full_pauli": "XXIIXXXXIIXX"
+        }
+      ],
+      "degree_in_commute_graph": 93
+    },
+    {
+      "full_pauli": "XXIIXXXXZIYX",
+      "tail": "XIIXXXXZIYX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXIIXX",
+          "block1": "XXZIYX",
+          "full_pauli": "XXIIXXXXZIYX"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XXIIYIIIIIII",
+      "tail": "XIIYIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XXIIYI",
+          "block1": "IIIIII",
+          "full_pauli": "XXIIYIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 47
+    },
+    {
+      "full_pauli": "XXIIYIIIIIZI",
+      "tail": "XIIYIIIIIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XXIIYI",
+          "block1": "IIIIZI",
+          "full_pauli": "XXIIYIIIIIZI"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XXIIYIXXIIXI",
+      "tail": "XIIYIXXIIXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XXIIYI",
+          "block1": "XXIIXI",
+          "full_pauli": "XXIIYIXXIIXI"
+        }
+      ],
+      "degree_in_commute_graph": 45
+    },
+    {
+      "full_pauli": "XXIIYIXXIIYI",
+      "tail": "XIIYIXXIIYI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XXIIYI",
+          "block1": "XXIIYI",
+          "full_pauli": "XXIIYIXXIIYI"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XXIXIIIIIIII",
+      "tail": "XIXIIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "5",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXIXII",
+          "block1": "IIIIII",
+          "full_pauli": "XXIXIIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 91
+    },
+    {
+      "full_pauli": "XXIXIIXXIXII",
+      "tail": "XIXIIXXIXII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "5",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXIXII",
+          "block1": "XXIXII",
+          "full_pauli": "XXIXIIXXIXII"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XXIXIIYYZYIZ",
+      "tail": "XIXIIYYZYIZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXIXII",
+          "block1": "YYZYIZ",
+          "full_pauli": "XXIXIIYYZYIZ"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XXIXIIZZZZIZ",
+      "tail": "XIXIIZZZZIZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "5",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXIXII",
+          "block1": "ZZZZIZ",
+          "full_pauli": "XXIXIIZZZZIZ"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XXIXXXIIIIII",
+      "tail": "XIXXXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "1",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXIXXX",
+          "block1": "IIIIII",
+          "full_pauli": "XXIXXXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 91
+    },
+    {
+      "full_pauli": "XXIXXXXXIXXX",
+      "tail": "XIXXXXXIXXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "1",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXIXXX",
+          "block1": "XXIXXX",
+          "full_pauli": "XXIXXXXXIXXX"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XXIXXXYXIYXY",
+      "tail": "XIXXXYXIYXY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "1",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXIXXX",
+          "block1": "YXIYXY",
+          "full_pauli": "XXIXXXYXIYXY"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XXIXXXZIIZIZ",
+      "tail": "XIXXXZIIZIZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "1",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXIXXX",
+          "block1": "ZIIZIZ",
+          "full_pauli": "XXIXXXZIIZIZ"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XXXIIXIIIIII",
+      "tail": "XXIIXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "3",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXXIIX",
+          "block1": "IIIIII",
+          "full_pauli": "XXXIIXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 87
+    },
+    {
+      "full_pauli": "XXXIIXXXXIIX",
+      "tail": "XXIIXXXXIIX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "3",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXXIIX",
+          "block1": "XXXIIX",
+          "full_pauli": "XXXIIXXXXIIX"
+        }
+      ],
+      "degree_in_commute_graph": 83
+    },
+    {
+      "full_pauli": "XXXIIXYYXIZY",
+      "tail": "XXIIXYYXIZY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXXIIX",
+          "block1": "YYXIZY",
+          "full_pauli": "XXXIIXYYXIZY"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XXXIIXZZIIZZ",
+      "tail": "XXIIXZZIIZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "3",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXXIIX",
+          "block1": "ZZIIZZ",
+          "full_pauli": "XXXIIXZZIIZZ"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XXXXIIIIIIII",
+      "tail": "XXXIIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXXXII",
+          "block1": "IIIIII",
+          "full_pauli": "XXXXIIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 87
+    },
+    {
+      "full_pauli": "XXXXIIIIIZZZ",
+      "tail": "XXXIIIIIZZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXXXII",
+          "block1": "IIIZZZ",
+          "full_pauli": "XXXXIIIIIZZZ"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XXXXIIXXXXII",
+      "tail": "XXXIIXXXXII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXXXII",
+          "block1": "XXXXII",
+          "full_pauli": "XXXXIIXXXXII"
+        }
+      ],
+      "degree_in_commute_graph": 83
+    },
+    {
+      "full_pauli": "XXXXIIXXXYZZ",
+      "tail": "XXXIIXXXYZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXXXII",
+          "block1": "XXXYZZ",
+          "full_pauli": "XXXXIIXXXYZZ"
+        }
+      ],
+      "degree_in_commute_graph": 65
+    },
+    {
+      "full_pauli": "XXXXXIIIIIII",
+      "tail": "XXXXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXXXXI",
+          "block1": "IIIIII",
+          "full_pauli": "XXXXXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 87
+    },
+    {
+      "full_pauli": "XXXXXIIIIZII",
+      "tail": "XXXXIIIIZII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXXXXI",
+          "block1": "IIIZII",
+          "full_pauli": "XXXXXIIIIZII"
+        }
+      ],
+      "degree_in_commute_graph": 71
+    },
+    {
+      "full_pauli": "XXXXXIXXXXXI",
+      "tail": "XXXXIXXXXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXXXXI",
+          "block1": "XXXXXI",
+          "full_pauli": "XXXXXIXXXXXI"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XXXXXIXXXYXI",
+      "tail": "XXXXIXXXYXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXXXXI",
+          "block1": "XXXYXI",
+          "full_pauli": "XXXXXIXXXYXI"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XXXXXXIIIIII",
+      "tail": "XXXXXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "4",
+          "p1": "X",
+          "p7": "I",
+          "block0": "XXXXXX",
+          "block1": "IIIIII",
+          "full_pauli": "XXXXXXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 95
+    },
+    {
+      "full_pauli": "XXXXXXXXXXXX",
+      "tail": "XXXXXXXXXXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "4",
+          "p1": "X",
+          "p7": "X",
+          "block0": "XXXXXX",
+          "block1": "XXXXXX",
+          "full_pauli": "XXXXXXXXXXXX"
+        }
+      ],
+      "degree_in_commute_graph": 83
+    },
+    {
+      "full_pauli": "XXXXXXYYXXYX",
+      "tail": "XXXXXYYXXYX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Y",
+          "block0": "XXXXXX",
+          "block1": "YYXXYX",
+          "full_pauli": "XXXXXXYYXXYX"
+        }
+      ],
+      "degree_in_commute_graph": 73
+    },
+    {
+      "full_pauli": "XXXXXXZZIIZI",
+      "tail": "XXXXXZZIIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "3",
+          "dy": "4",
+          "p1": "X",
+          "p7": "Z",
+          "block0": "XXXXXX",
+          "block1": "ZZIIZI",
+          "full_pauli": "XXXXXXZZIIZI"
+        }
+      ],
+      "degree_in_commute_graph": 77
+    },
+    {
+      "full_pauli": "XXXYXIIIIIII",
+      "tail": "XXYXIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XXXYXI",
+          "block1": "IIIIII",
+          "full_pauli": "XXXYXIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 55
+    },
+    {
+      "full_pauli": "XXXYXIIIIZII",
+      "tail": "XXYXIIIIZII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XXXYXI",
+          "block1": "IIIZII",
+          "full_pauli": "XXXYXIIIIZII"
+        }
+      ],
+      "degree_in_commute_graph": 71
+    },
+    {
+      "full_pauli": "XXXYXIXXXXXI",
+      "tail": "XXYXIXXXXXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XXXYXI",
+          "block1": "XXXXXI",
+          "full_pauli": "XXXYXIXXXXXI"
+        }
+      ],
+      "degree_in_commute_graph": 51
+    },
+    {
+      "full_pauli": "XXXYXIXXXYXI",
+      "tail": "XXYXIXXXYXI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "1",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XXXYXI",
+          "block1": "XXXYXI",
+          "full_pauli": "XXXYXIXXXYXI"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XXXYZZIIIIII",
+      "tail": "XXYZZIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XXXYZZ",
+          "block1": "IIIIII",
+          "full_pauli": "XXXYZZIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 47
+    },
+    {
+      "full_pauli": "XXXYZZIIIZZZ",
+      "tail": "XXYZZIIIZZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XXXYZZ",
+          "block1": "IIIZZZ",
+          "full_pauli": "XXXYZZIIIZZZ"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XXXYZZXXXXII",
+      "tail": "XXYZZXXXXII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XXXYZZ",
+          "block1": "XXXXII",
+          "full_pauli": "XXXYZZXXXXII"
+        }
+      ],
+      "degree_in_commute_graph": 47
+    },
+    {
+      "full_pauli": "XXXYZZXXXYZZ",
+      "tail": "XXYZZXXXYZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "0",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XXXYZZ",
+          "block1": "XXXYZZ",
+          "full_pauli": "XXXYZZXXXYZZ"
+        }
+      ],
+      "degree_in_commute_graph": 65
+    },
+    {
+      "full_pauli": "XXZIYXIIIIII",
+      "tail": "XZIYXIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XXZIYX",
+          "block1": "IIIIII",
+          "full_pauli": "XXZIYXIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XXZIYXIIZIZI",
+      "tail": "XZIYXIIZIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XXZIYX",
+          "block1": "IIZIZI",
+          "full_pauli": "XXZIYXIIZIZI"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XXZIYXXXIIXX",
+      "tail": "XZIYXXXIIXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XXZIYX",
+          "block1": "XXIIXX",
+          "full_pauli": "XXZIYXXXIIXX"
+        }
+      ],
+      "degree_in_commute_graph": 57
+    },
+    {
+      "full_pauli": "XXZIYXXXZIYX",
+      "tail": "XZIYXXXZIYX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "2",
+          "dy": "3",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XXZIYX",
+          "block1": "XXZIYX",
+          "full_pauli": "XXZIYXXXZIYX"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XYIIZIIIIIII",
+      "tail": "YIIZIIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XYIIZI",
+          "block1": "IIIIII",
+          "full_pauli": "XYIIZIIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XYIIZIIZIIZI",
+      "tail": "YIIZIIZIIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XYIIZI",
+          "block1": "IZIIZI",
+          "full_pauli": "XYIIZIIZIIZI"
+        }
+      ],
+      "degree_in_commute_graph": 81
+    },
+    {
+      "full_pauli": "XYIIZIXXIIII",
+      "tail": "YIIZIXXIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XYIIZI",
+          "block1": "XXIIII",
+          "full_pauli": "XYIIZIXXIIII"
+        }
+      ],
+      "degree_in_commute_graph": 57
+    },
+    {
+      "full_pauli": "XYIIZIXYIIZI",
+      "tail": "YIIZIXYIIZI",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "0",
+          "dy": "5",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XYIIZI",
+          "block1": "XYIIZI",
+          "full_pauli": "XYIIZIXYIIZI"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XZIYYYIIIIII",
+      "tail": "ZIYYYIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XZIYYY",
+          "block1": "IIIIII",
+          "full_pauli": "XZIYYYIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 71
+    },
+    {
+      "full_pauli": "XZIYYYIZIZZZ",
+      "tail": "ZIYYYIZIZZZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XZIYYY",
+          "block1": "IZIZZZ",
+          "full_pauli": "XZIYYYIZIZZZ"
+        }
+      ],
+      "degree_in_commute_graph": 75
+    },
+    {
+      "full_pauli": "XZIYYYXIIXXX",
+      "tail": "ZIYYYXIIXXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XZIYYY",
+          "block1": "XIIXXX",
+          "full_pauli": "XZIYYYXIIXXX"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    },
+    {
+      "full_pauli": "XZIYYYXZIYYY",
+      "tail": "ZIYYYXZIYYY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "4",
+          "dy": "4",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XZIYYY",
+          "block1": "XZIYYY",
+          "full_pauli": "XZIYYYXZIYYY"
+        }
+      ],
+      "degree_in_commute_graph": 67
+    },
+    {
+      "full_pauli": "XZXIXYIIIIII",
+      "tail": "ZXIXYIIIIII",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "Y",
+          "p7": "I",
+          "block0": "XZXIXY",
+          "block1": "IIIIII",
+          "full_pauli": "XZXIXYIIIIII"
+        }
+      ],
+      "degree_in_commute_graph": 47
+    },
+    {
+      "full_pauli": "XZXIXYIZIIIZ",
+      "tail": "ZXIXYIZIIIZ",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "Y",
+          "p7": "Z",
+          "block0": "XZXIXY",
+          "block1": "IZIIIZ",
+          "full_pauli": "XZXIXYIZIIIZ"
+        }
+      ],
+      "degree_in_commute_graph": 69
+    },
+    {
+      "full_pauli": "XZXIXYXIXIXX",
+      "tail": "ZXIXYXIXIXX",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "Y",
+          "p7": "X",
+          "block0": "XZXIXY",
+          "block1": "XIXIXX",
+          "full_pauli": "XZXIXYXIXIXX"
+        }
+      ],
+      "degree_in_commute_graph": 45
+    },
+    {
+      "full_pauli": "XZXIXYXZXIXY",
+      "tail": "ZXIXYXZXIXY",
+      "witness_count": 1,
+      "witnesses": [
+        {
+          "dx": "5",
+          "dy": "2",
+          "p1": "Y",
+          "p7": "Y",
+          "block0": "XZXIXY",
+          "block1": "XZXIXY",
+          "full_pauli": "XZXIXYXZXIXY"
+        }
+      ],
+      "degree_in_commute_graph": 63
+    }
+  ]
+}
