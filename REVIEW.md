@@ -1,4 +1,4 @@
-# Boss Review Quickstart
+# Review Quickstart
 
 ## What Is Compared
 
@@ -16,7 +16,7 @@ Both are exposed through the shared Rust interface:
 Run from repo root:
 
 ```bash
-./scripts/boss_check.sh
+./scripts/check.sh
 ```
 
 Default mode is **smoke** (fast review path): formatting, lint, smoke tests, checks, histogram generation, comparison plots, split benchmarks, and boss reports.
@@ -25,7 +25,7 @@ For full/heavy validation:
 
 ```bash
 ./scripts/full_validation.sh
-# or: ./scripts/boss_check.sh --full
+# or: ./scripts/check.sh --full
 ```
 
 ## Where Outputs Appear
@@ -37,8 +37,8 @@ For full/heavy validation:
 
 Main boss-facing report files:
 
-- `results/reports/boss_validation.md`
-- `results/reports/boss_validation.json`
+- `results/reports/validation.md`
+- `results/reports/validation.json`
 
 ## Paper Comparison Files
 
