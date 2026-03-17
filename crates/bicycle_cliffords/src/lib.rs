@@ -22,6 +22,46 @@ mod pauli_string;
 
 pub use pauli_string::PauliString;
 
+pub mod draft_types;
+pub use draft_types::{
+    DraftBuildResult, DraftHistograms, Head, InsertionWitness, LibraryEntry, NativeRow, RuleClass,
+    StateEntry, StateKey, Tail11, TransitionOutcome, TransitionRow, TAIL_QUBITS, TAIL_SPACE_SIZE,
+};
+
+pub mod draft_core;
+pub use draft_core::{
+    build_draft_library, build_draft_library_for_code, native_rows_for_code, transition,
+};
+
+pub mod draft_trace;
+pub use draft_trace::{
+    explain_tail, format_explain_entry, grouped_by_local_measurement_count, grouped_by_rule,
+    grouped_by_transition_row,
+};
+
+pub mod draft_reports;
+pub use draft_reports::{build_json_report, report_to_json_pretty, DraftJsonReport};
+
+pub mod draft_single_shot;
+pub use draft_single_shot::{
+    compute_ours_single_shot_exact_hist_for_choice, compute_ours_single_shot_exact_hist_for_code,
+    compute_ours_single_shot_exact_hist_from_native_rows,
+    compute_paper_baseline_exact_hist_for_choice, compute_paper_baseline_exact_hist_for_code,
+    compute_paper_baseline_exact_hist_with_table, compute_pivot_scan_experiment_for_choice,
+    compute_pivot_scan_experiment_for_code,
+    compute_pivot_scan_experiment_from_native_rows_by_pivot,
+    compute_safe_pivot_experiment_for_choice, compute_safe_pivot_experiment_for_code,
+    compute_safe_pivot_experiment_from_native_rows_by_pivot,
+    explain_ours_single_shot_target_for_code, explain_ours_single_shot_target_from_native_rows,
+    infer_measurement_choice_from_csv_path, infer_measurement_choice_from_native_rows,
+    native_rows_for_code_all_pivots, native_rows_for_code_with_pivot, parse_native_rows_from_csv,
+    transition_local, BestSinglePivotSummaryReport, ExactHistogramReport,
+    OursSingleShotTargetExplain, PivotScanExperimentReport, PivotScanPivotSummary,
+    PivotScanSummaryReport, SafePivotCertificationReport, SafePivotExperimentReport,
+    SafePivotSummaryReport, SafePivotTransformationReport, SingleShotPathNode,
+    SingleShotPathWitness, SingleShotSourceRule, SingleShotSourceWitness,
+};
+
 pub mod decomposition;
 pub use decomposition::{CompleteMeasurementTable, MeasurementTableBuilder};
 

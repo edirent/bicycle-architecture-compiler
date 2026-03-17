@@ -20,7 +20,8 @@ use std::{
 use log::{debug, info};
 
 use bicycle_cliffords::{
-    MeasurementChoices, MeasurementTableBuilder, PauliString, native_measurement::NativeMeasurement,
+    MeasurementChoices, MeasurementTableBuilder, PauliString, build_draft_library_for_code,
+    native_measurement::NativeMeasurement, report_to_json_pretty,
 };
 
 use clap::Parser;
@@ -31,12 +32,22 @@ struct Cli {
     /// Do not optimize over choice of pivot basis. Result will be 12-qubit strings.
     #[arg(long)]
     no_optimize: bool,
+    /// Emit the handwritten-draft library report as JSON instead of legacy rotation table output.
+    #[arg(long)]
+    draft_report: bool,
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
     env_logger::init();
 
     let cli = Cli::parse();
+
+    if cli.draft_report {
+        let build = build_draft_library_for_code(cli.code.measurement());
+        let report_json = report_to_json_pretty(&build)?;
+        println!("{report_json}");
+        return Ok(());
+    }
 
     let mut table = MeasurementTableBuilder::new(NativeMeasurement::all(), cli.code.measurement());
     table.build();

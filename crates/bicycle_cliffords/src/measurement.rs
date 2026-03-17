@@ -15,9 +15,9 @@
 use std::fmt::{Debug, Display};
 
 use bicycle_common::{AutomorphismData, Pauli};
-use nalgebra::{SMatrix, Vector6, matrix, stack};
+use nalgebra::{matrix, stack, SMatrix, Vector6};
 
-use crate::{PauliString, native_measurement::NativeMeasurement};
+use crate::{native_measurement::NativeMeasurement, PauliString};
 use clap::ValueEnum;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]

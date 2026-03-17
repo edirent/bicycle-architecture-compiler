@@ -1,0 +1,101 @@
+{
+  "deleted_files": [
+    "target/",
+    "__pycache__/",
+    "notebooks/__pycache__/",
+    "pylib/__pycache__/"
+  ],
+  "moved_files": [
+    {"from": "./compare_11q_single_shot_5bin_log_single_panel.svg", "to": "results/figures/compare_11q_single_shot_5bin_log_single_panel.svg"},
+    {"from": "./compare_11q_single_shot_5bin_standard.svg", "to": "results/figures/compare_11q_single_shot_5bin_standard.svg"},
+    {"from": "./ours_fixed_pivot_exact_hist.json", "to": "results/histograms/ours_fixed_pivot_exact_hist.json"},
+    {"from": "./ours_safe_pivot_exact_hist.json", "to": "results/histograms/ours_safe_pivot_exact_hist.json"},
+    {"from": "./ours_single_shot_best_single_pivot_exact_hist.json", "to": "results/histograms/ours_single_shot_best_single_pivot_exact_hist.json"},
+    {"from": "./ours_single_shot_fixed_pivot_exact_hist.json", "to": "results/histograms/ours_single_shot_fixed_pivot_exact_hist.json"},
+    {"from": "./ours_single_shot_gross_5bin_hist.json", "to": "results/histograms/ours_single_shot_gross_5bin_hist.json"},
+    {"from": "./ours_single_shot_gross_exact_hist.json", "to": "results/histograms/ours_single_shot_gross_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_10_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_10_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_11_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_11_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_12_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_12_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_1_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_1_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_2_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_2_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_3_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_3_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_4_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_4_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_5_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_5_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_6_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_6_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_7_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_7_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_8_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_8_exact_hist.json"},
+    {"from": "./ours_single_shot_pivot_9_exact_hist.json", "to": "results/histograms/ours_single_shot_pivot_9_exact_hist.json"},
+    {"from": "./ours_single_shot_two_gross_5bin_hist.json", "to": "results/histograms/ours_single_shot_two_gross_5bin_hist.json"},
+    {"from": "./ours_single_shot_two_gross_exact_hist.json", "to": "results/histograms/ours_single_shot_two_gross_exact_hist.json"},
+    {"from": "./paper_baseline_gross_5bin_hist.json", "to": "results/histograms/paper_baseline_gross_5bin_hist.json"},
+    {"from": "./paper_baseline_gross_exact_hist.json", "to": "results/histograms/paper_baseline_gross_exact_hist.json"},
+    {"from": "./paper_baseline_two_gross_5bin_hist.json", "to": "results/histograms/paper_baseline_two_gross_5bin_hist.json"},
+    {"from": "./paper_baseline_two_gross_exact_hist.json", "to": "results/histograms/paper_baseline_two_gross_exact_hist.json"},
+    {"from": "./ours_safe_pivot_summary.json", "to": "results/reports/ours_safe_pivot_summary.json"},
+    {"from": "./ours_single_shot_best_single_pivot_summary.json", "to": "results/reports/ours_single_shot_best_single_pivot_summary.json"},
+    {"from": "./ours_single_shot_gross_summary.json", "to": "results/reports/ours_single_shot_gross_summary.json"},
+    {"from": "./ours_single_shot_pivot_10_summary.json", "to": "results/reports/ours_single_shot_pivot_10_summary.json"},
+    {"from": "./ours_single_shot_pivot_11_summary.json", "to": "results/reports/ours_single_shot_pivot_11_summary.json"},
+    {"from": "./ours_single_shot_pivot_12_summary.json", "to": "results/reports/ours_single_shot_pivot_12_summary.json"},
+    {"from": "./ours_single_shot_pivot_1_summary.json", "to": "results/reports/ours_single_shot_pivot_1_summary.json"},
+    {"from": "./ours_single_shot_pivot_2_summary.json", "to": "results/reports/ours_single_shot_pivot_2_summary.json"},
+    {"from": "./ours_single_shot_pivot_3_summary.json", "to": "results/reports/ours_single_shot_pivot_3_summary.json"},
+    {"from": "./ours_single_shot_pivot_4_summary.json", "to": "results/reports/ours_single_shot_pivot_4_summary.json"},
+    {"from": "./ours_single_shot_pivot_5_summary.json", "to": "results/reports/ours_single_shot_pivot_5_summary.json"},
+    {"from": "./ours_single_shot_pivot_6_summary.json", "to": "results/reports/ours_single_shot_pivot_6_summary.json"},
+    {"from": "./ours_single_shot_pivot_7_summary.json", "to": "results/reports/ours_single_shot_pivot_7_summary.json"},
+    {"from": "./ours_single_shot_pivot_8_summary.json", "to": "results/reports/ours_single_shot_pivot_8_summary.json"},
+    {"from": "./ours_single_shot_pivot_9_summary.json", "to": "results/reports/ours_single_shot_pivot_9_summary.json"},
+    {"from": "./ours_single_shot_two_gross_summary.json", "to": "results/reports/ours_single_shot_two_gross_summary.json"},
+    {"from": "./paper_baseline_gross_summary.json", "to": "results/reports/paper_baseline_gross_summary.json"},
+    {"from": "./paper_baseline_two_gross_summary.json", "to": "results/reports/paper_baseline_two_gross_summary.json"},
+    {"from": "./pivot_scan_summary.json", "to": "results/reports/pivot_scan_summary.json"},
+    {"from": "./safe_pivot_certification.json", "to": "results/reports/safe_pivot_certification.json"}
+  ],
+  "kept_large_files": [
+    {
+      "path": ".venv/lib/python3.13/site-packages/numpy.libs/libscipy_openblas64_-2e5251cf.so",
+      "size_bytes": 28699769,
+      "category": "local_environment",
+      "action": "kept (ambiguous runtime dependency; .venv already gitignored)"
+    },
+    {
+      "path": ".venv/lib/python3.13/site-packages/debugpy/_vendored/pydevd/pydevd_attach_to_process/inject_dll_x86.pdb",
+      "size_bytes": 5902336,
+      "category": "local_environment",
+      "action": "kept (ambiguous runtime dependency; .venv already gitignored)"
+    },
+    {
+      "path": ".venv/lib/python3.13/site-packages/numpy/_core/_multiarray_umath.cpython-313-aarch64-linux-gnu.so",
+      "size_bytes": 5787449,
+      "category": "local_environment",
+      "action": "kept (ambiguous runtime dependency; .venv already gitignored)"
+    },
+    {
+      "path": ".venv/lib/python3.13/site-packages/debugpy/_vendored/pydevd/pydevd_attach_to_process/inject_dll_amd64.pdb",
+      "size_bytes": 5779456,
+      "category": "local_environment",
+      "action": "kept (ambiguous runtime dependency; .venv already gitignored)"
+    }
+  ],
+  "ignored_patterns_added": [
+    ".DS_Store",
+    "*.pyc",
+    ".ipynb_checkpoints/",
+    "*.swp",
+    "*.swo",
+    "tmp/",
+    "temp/",
+    "cache/",
+    "scratch/",
+    "results/generated_tmp/"
+  ],
+  "directories_created": [
+    "results/",
+    "results/figures/",
+    "results/histograms/",
+    "results/reports/",
+    "scratch/"
+  ]
+}

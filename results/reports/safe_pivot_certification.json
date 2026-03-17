@@ -1,0 +1,665 @@
+{
+  "candidate_qubits": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "accepted_qubits": [
+    1
+  ],
+  "rejected_qubits": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "rejection_reasons": {
+    "2": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "3": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "4": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "5": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "6": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "7": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "8": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "9": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "10": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "11": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ],
+    "12": [
+      "criterion 3.1 failed for all trusted shifts: no single-qubit pivot image to this qubit."
+    ]
+  },
+  "admissible_transformations_used": [
+    {
+      "name": "shift(0, 0)",
+      "shift_x": 0,
+      "shift_y": 0,
+      "pivot_image": 1,
+      "pair_image": [
+        1,
+        7
+      ],
+      "pivot_image_preserved": true,
+      "lpu_pair_preserved": true,
+      "p0_grammar_preserved": true,
+      "p2_grammar_preserved": true,
+      "p3_transition_preserved": true,
+      "accepted": true,
+      "failure_reasons": []
+    }
+  ],
+  "examined_transformations": [
+    {
+      "name": "shift(0, 0)",
+      "shift_x": 0,
+      "shift_y": 0,
+      "pivot_image": 1,
+      "pair_image": [
+        1,
+        7
+      ],
+      "pivot_image_preserved": true,
+      "lpu_pair_preserved": true,
+      "p0_grammar_preserved": true,
+      "p2_grammar_preserved": true,
+      "p3_transition_preserved": true,
+      "accepted": true,
+      "failure_reasons": []
+    },
+    {
+      "name": "shift(0, 1)",
+      "shift_x": 0,
+      "shift_y": 1,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(0, 2)",
+      "shift_x": 0,
+      "shift_y": 2,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(0, 3)",
+      "shift_x": 0,
+      "shift_y": 3,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(0, 4)",
+      "shift_x": 0,
+      "shift_y": 4,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(0, 5)",
+      "shift_x": 0,
+      "shift_y": 5,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(1, 0)",
+      "shift_x": 1,
+      "shift_y": 0,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(1, 1)",
+      "shift_x": 1,
+      "shift_y": 1,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: Z_1 is not mapped to a single-qubit Z image"
+      ]
+    },
+    {
+      "name": "shift(1, 2)",
+      "shift_x": 1,
+      "shift_y": 2,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: Z_1 is not mapped to a single-qubit Z image"
+      ]
+    },
+    {
+      "name": "shift(1, 3)",
+      "shift_x": 1,
+      "shift_y": 3,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(1, 4)",
+      "shift_x": 1,
+      "shift_y": 4,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(1, 5)",
+      "shift_x": 1,
+      "shift_y": 5,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(2, 0)",
+      "shift_x": 2,
+      "shift_y": 0,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(2, 1)",
+      "shift_x": 2,
+      "shift_y": 1,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(2, 2)",
+      "shift_x": 2,
+      "shift_y": 2,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(2, 3)",
+      "shift_x": 2,
+      "shift_y": 3,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(2, 4)",
+      "shift_x": 2,
+      "shift_y": 4,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: Z_1 is not mapped to a single-qubit Z image"
+      ]
+    },
+    {
+      "name": "shift(2, 5)",
+      "shift_x": 2,
+      "shift_y": 5,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: Z_1 is not mapped to a single-qubit Z image"
+      ]
+    },
+    {
+      "name": "shift(3, 0)",
+      "shift_x": 3,
+      "shift_y": 0,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(3, 1)",
+      "shift_x": 3,
+      "shift_y": 1,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: Z_1 is not mapped to a single-qubit Z image"
+      ]
+    },
+    {
+      "name": "shift(3, 2)",
+      "shift_x": 3,
+      "shift_y": 2,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(3, 3)",
+      "shift_x": 3,
+      "shift_y": 3,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(3, 4)",
+      "shift_x": 3,
+      "shift_y": 4,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(3, 5)",
+      "shift_x": 3,
+      "shift_y": 5,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(4, 0)",
+      "shift_x": 4,
+      "shift_y": 0,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(4, 1)",
+      "shift_x": 4,
+      "shift_y": 1,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(4, 2)",
+      "shift_x": 4,
+      "shift_y": 2,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(4, 3)",
+      "shift_x": 4,
+      "shift_y": 3,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(4, 4)",
+      "shift_x": 4,
+      "shift_y": 4,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(4, 5)",
+      "shift_x": 4,
+      "shift_y": 5,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(5, 0)",
+      "shift_x": 5,
+      "shift_y": 0,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(5, 1)",
+      "shift_x": 5,
+      "shift_y": 1,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(5, 2)",
+      "shift_x": 5,
+      "shift_y": 2,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(5, 3)",
+      "shift_x": 5,
+      "shift_y": 3,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(5, 4)",
+      "shift_x": 5,
+      "shift_y": 4,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    },
+    {
+      "name": "shift(5, 5)",
+      "shift_x": 5,
+      "shift_y": 5,
+      "pivot_image": null,
+      "pair_image": null,
+      "pivot_image_preserved": false,
+      "lpu_pair_preserved": false,
+      "p0_grammar_preserved": false,
+      "p2_grammar_preserved": false,
+      "p3_transition_preserved": false,
+      "accepted": false,
+      "failure_reasons": [
+        "criterion 3.1 failed: X_1 is not mapped to a single-qubit X image"
+      ]
+    }
+  ]
+}

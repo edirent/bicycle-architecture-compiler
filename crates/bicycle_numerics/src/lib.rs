@@ -14,7 +14,7 @@
 
 use bicycle_common::BicycleISA;
 
-use bicycle_compiler::{operation::Operation, PathArchitecture};
+use bicycle_compiler::{PathArchitecture, operation::Operation};
 use log::trace;
 use model::Model;
 use serde::{Deserialize, Serialize};

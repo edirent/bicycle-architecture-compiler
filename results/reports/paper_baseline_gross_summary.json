@@ -1,0 +1,22 @@
+{
+  "histogram": {
+    "1": 246,
+    "7": 12579,
+    "13": 490770,
+    "19": 3505249,
+    "25": 185460
+  },
+  "total_targets": 4194304,
+  "reachable_targets": 4194304,
+  "unreachable_targets": 0,
+  "support": [
+    1,
+    7,
+    13,
+    19,
+    25
+  ],
+  "median": 19,
+  "mean": 18.526206016540527,
+  "sample_unreachable_tails": []
+}
