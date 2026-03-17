@@ -12,19 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use std::collections::BTreeMap;
 use std::error::Error;
 use std::fs;
 use std::path::{Path, PathBuf};
 
 use bicycle_cliffords::{
-    compute_ours_single_shot_exact_hist_for_choice,
-    compute_ours_single_shot_exact_hist_from_native_rows, compute_pivot_scan_experiment_for_choice,
+    ExactHistogramReport, MeasurementChoices, NativeRow, OursSingleShot11Q, SingleShot11QAlgorithm,
+    Tail11, compute_pivot_scan_experiment_for_choice,
     compute_pivot_scan_experiment_from_native_rows_by_pivot,
     compute_safe_pivot_experiment_for_choice,
     compute_safe_pivot_experiment_from_native_rows_by_pivot,
     explain_ours_single_shot_target_for_code, explain_ours_single_shot_target_from_native_rows,
     infer_measurement_choice_from_csv_path, infer_measurement_choice_from_native_rows,
-    parse_native_rows_from_csv, ExactHistogramReport, MeasurementChoices, NativeRow, Tail11,
+    parse_native_rows_from_csv,
 };
 use clap::Parser;
 
@@ -38,7 +39,7 @@ struct Cli {
     #[arg(long)]
     code: Option<MeasurementChoices>,
     /// Output prefix. Writes <out>_exact_hist.json and <out>_summary.json.
-    #[arg(long, default_value = "ours_single_shot")]
+    #[arg(long, default_value = "results/histograms/ours_single_shot")]
     out: PathBuf,
     #[arg(long)]
     explain_tail: Option<String>,
@@ -48,16 +49,22 @@ struct Cli {
     #[arg(long)]
     ours_safe_pivot_report: bool,
     /// Output JSON path for safe-pivot certification details.
-    #[arg(long, default_value = "safe_pivot_certification.json")]
+    #[arg(long, default_value = "results/reports/safe_pivot_certification.json")]
     safe_pivot_certification_out: PathBuf,
     /// Output JSON path for the fixed-pivot exact histogram.
-    #[arg(long, default_value = "ours_fixed_pivot_exact_hist.json")]
+    #[arg(
+        long,
+        default_value = "results/histograms/ours_fixed_pivot_exact_hist.json"
+    )]
     ours_fixed_pivot_hist_out: PathBuf,
     /// Output JSON path for the safe-pivot exact histogram.
-    #[arg(long, default_value = "ours_safe_pivot_exact_hist.json")]
+    #[arg(
+        long,
+        default_value = "results/histograms/ours_safe_pivot_exact_hist.json"
+    )]
     ours_safe_pivot_hist_out: PathBuf,
     /// Output JSON path for safe-pivot summary stats.
-    #[arg(long, default_value = "ours_safe_pivot_summary.json")]
+    #[arg(long, default_value = "results/reports/ours_safe_pivot_summary.json")]
     ours_safe_pivot_summary_out: PathBuf,
     /// Emit direct pivot recompilation scan and best-single-pivot reports.
     #[arg(long)]
@@ -66,25 +73,28 @@ struct Cli {
     #[arg(long, value_delimiter = ',')]
     pivot_candidates: Option<Vec<u8>>,
     /// Output JSON path for pivot scan summary.
-    #[arg(long, default_value = "pivot_scan_summary.json")]
+    #[arg(long, default_value = "results/reports/pivot_scan_summary.json")]
     pivot_scan_summary_out: PathBuf,
     /// Output JSON path for fixed-pivot histogram in pivot-scan mode.
-    #[arg(long, default_value = "ours_single_shot_fixed_pivot_exact_hist.json")]
+    #[arg(
+        long,
+        default_value = "results/histograms/ours_single_shot_fixed_pivot_exact_hist.json"
+    )]
     ours_single_shot_fixed_pivot_hist_out: PathBuf,
     /// Output JSON path for best-single-pivot histogram.
     #[arg(
         long,
-        default_value = "ours_single_shot_best_single_pivot_exact_hist.json"
+        default_value = "results/histograms/ours_single_shot_best_single_pivot_exact_hist.json"
     )]
     ours_single_shot_best_single_pivot_hist_out: PathBuf,
     /// Output JSON path for best-single-pivot summary.
     #[arg(
         long,
-        default_value = "ours_single_shot_best_single_pivot_summary.json"
+        default_value = "results/reports/ours_single_shot_best_single_pivot_summary.json"
     )]
     ours_single_shot_best_single_pivot_summary_out: PathBuf,
     /// Prefix for per-pivot outputs: <prefix>_<j>_exact_hist.json and <prefix>_<j>_summary.json.
-    #[arg(long, default_value = "ours_single_shot_pivot")]
+    #[arg(long, default_value = "results/histograms/ours_single_shot_pivot")]
     ours_single_shot_pivot_prefix: PathBuf,
 }
 
@@ -92,19 +102,38 @@ fn with_suffix(prefix: &Path, suffix: &str) -> PathBuf {
     PathBuf::from(format!("{}{}", prefix.display(), suffix))
 }
 
+fn ensure_parent_dir(path: &Path) -> Result<(), Box<dyn Error>> {
+    if let Some(parent) = path.parent() {
+        if !parent.as_os_str().is_empty() {
+            fs::create_dir_all(parent)?;
+        }
+    }
+    Ok(())
+}
+
 fn write_hist_only(path: &Path, report: &ExactHistogramReport) -> Result<(), Box<dyn Error>> {
+    ensure_parent_dir(path)?;
     let text = serde_json::to_string_pretty(&report.histogram)?;
     fs::write(path, text)?;
     Ok(())
 }
 
-fn write_summary(path: &Path, report: &ExactHistogramReport) -> Result<(), Box<dyn Error>> {
+fn write_hist_map(path: &Path, histogram: &BTreeMap<u32, u64>) -> Result<(), Box<dyn Error>> {
+    ensure_parent_dir(path)?;
+    let text = serde_json::to_string_pretty(histogram)?;
+    fs::write(path, text)?;
+    Ok(())
+}
+
+fn write_summary<T: serde::Serialize>(path: &Path, report: &T) -> Result<(), Box<dyn Error>> {
+    ensure_parent_dir(path)?;
     let text = serde_json::to_string_pretty(report)?;
     fs::write(path, text)?;
     Ok(())
 }
 
 fn write_json<T: serde::Serialize>(path: &Path, value: &T) -> Result<(), Box<dyn Error>> {
+    ensure_parent_dir(path)?;
     let text = serde_json::to_string_pretty(value)?;
     fs::write(path, text)?;
     Ok(())
@@ -151,6 +180,13 @@ fn load_native_rows_for_all_pivots_from_csv_if_present(
         rows_by_pivot.push(parse_native_rows_from_csv(path, pivot_index)?);
     }
     Ok(Some(rows_by_pivot))
+}
+
+fn code_hint(choice: MeasurementChoices) -> &'static str {
+    match choice {
+        MeasurementChoices::Gross => "gross_hint.csv",
+        MeasurementChoices::TwoGross => "two_gross_hint.csv",
+    }
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -292,16 +328,19 @@ fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    let report = if let Some(rows) = csv_rows.as_ref() {
-        compute_ours_single_shot_exact_hist_from_native_rows(rows)
-    } else {
-        compute_ours_single_shot_exact_hist_for_choice(choice)
-    };
+    let csv_hint = cli
+        .csv
+        .as_ref()
+        .map(|path| path.to_string_lossy().into_owned())
+        .unwrap_or_else(|| code_hint(choice).to_string());
+    let algorithm = OursSingleShot11Q;
+    let histogram = algorithm.compute_exact_hist(&csv_hint, 0)?;
+    let summary = algorithm.compute_summary(&csv_hint, 0)?;
     let hist_path = with_suffix(&cli.out, "_exact_hist.json");
     let summary_path = with_suffix(&cli.out, "_summary.json");
 
-    write_hist_only(&hist_path, &report)?;
-    write_summary(&summary_path, &report)?;
+    write_hist_map(&hist_path, &histogram)?;
+    write_summary(&summary_path, &summary)?;
 
     println!("Wrote ours single-shot exact hist: {}", hist_path.display());
     println!(
@@ -310,7 +349,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     );
     println!(
         "ours_single_shot ({choice}): targets={}, reachable={}, mean={:?}, median={:?}, support={:?}",
-        report.total_targets, report.reachable_targets, report.mean, report.median, report.support
+        summary.total_targets,
+        summary.reachable_targets,
+        summary.mean,
+        summary.median,
+        summary.support
     );
 
     if let Some(tail_label) = cli.explain_tail.as_deref() {

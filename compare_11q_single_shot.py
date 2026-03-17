@@ -531,6 +531,12 @@ def main() -> int:
             "11Q paper-style 5-bin comparison: gross",
         )
         plot_binned(
+            root / FIG_DIR / "paper_vs_ours_11q_5bin.png",
+            ours_gross,
+            paper_gross,
+            "11Q paper-style 5-bin comparison: paper vs ours (gross)",
+        )
+        plot_binned(
             root / FIG_DIR / "compare_11q_single_shot_binned_two_gross.png",
             ours_two,
             paper_two,
@@ -543,6 +549,7 @@ def main() -> int:
         print("Wrote binned plots:")
         print(f"  {(root / FIG_DIR / 'compare_11q_single_shot_binned_gross.png')}")
         print(f"  {(root / FIG_DIR / 'compare_11q_single_shot_binned_two_gross.png')}")
+        print(f"  {(root / FIG_DIR / 'paper_vs_ours_11q_5bin.png')}")
     except ModuleNotFoundError as exc:
         if exc.name != "matplotlib":
             raise

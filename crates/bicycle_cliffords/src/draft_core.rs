@@ -44,7 +44,7 @@ use std::collections::{BTreeMap, BinaryHeap, HashMap};
 use crate::draft_types::{
     DraftBuildResult, DraftHistograms, Head, InsertionWitness, LibraryEntry, NativeRow,
     NativeRowMetadata, P0IWitness, P0QWitness, P2Witness, P3Witness, RuleClass, StateEntry,
-    StateKey, Tail11, TransitionOutcome, TAIL_SPACE_SIZE,
+    StateKey, TAIL_SPACE_SIZE, Tail11, TransitionOutcome,
 };
 use crate::measurement::CodeMeasurement;
 use crate::native_measurement::NativeMeasurement;
@@ -444,11 +444,13 @@ mod tests {
 
         assert!(matches!(entry.first_rule, RuleClass::P0I | RuleClass::P0Q));
         assert!(entry.local_measurement_count == 1 || entry.local_measurement_count == 2);
-        assert!(result
-            .histograms
-            .local_measurement_count_hist
-            .keys()
-            .all(|k| *k == 1 || *k == 2));
+        assert!(
+            result
+                .histograms
+                .local_measurement_count_hist
+                .keys()
+                .all(|k| *k == 1 || *k == 2)
+        );
     }
 
     #[test]
@@ -507,7 +509,7 @@ mod tests {
         let result = build_draft_library(&rows);
 
         assert!(
-            result.library.get(&expected_cross_product).is_none(),
+            !result.library.contains_key(&expected_cross_product),
             "Cross-basis pair must not produce a P2 insertion"
         );
     }
@@ -554,10 +556,12 @@ mod tests {
         let rows = vec![row(0, Head::I, tail), row(1, Head::X, tail)];
         let result = build_draft_library(&rows);
 
-        assert!(result
-            .library
-            .values()
-            .all(|entry| !matches!(entry.witness, InsertionWitness::P3(_))));
+        assert!(
+            result
+                .library
+                .values()
+                .all(|entry| !matches!(entry.witness, InsertionWitness::P3(_)))
+        );
     }
 
     #[test]

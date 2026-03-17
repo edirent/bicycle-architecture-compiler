@@ -135,11 +135,7 @@ impl Index<usize> for PauliString {
     type Output = bool;
 
     fn index(&self, i: usize) -> &Self::Output {
-        if self.get_bit(i) {
-            &true
-        } else {
-            &false
-        }
+        if self.get_bit(i) { &true } else { &false }
     }
 }
 

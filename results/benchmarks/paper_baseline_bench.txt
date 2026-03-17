@@ -1,0 +1,8 @@
+benchmark=paper_baseline_11q
+algorithm=paper-baseline-11q
+csv=/home/edirent/bicycle-architecture-compiler/native.csv
+pivot_index=0
+inferred_choice=Some(Gross)
+native_read_ms=1.899
+exact_hist_ms=46164.821
+summary_ms=45352.538

@@ -20,16 +20,16 @@ use std::path::Path;
 use bicycle_common::{AutomorphismData, Pauli};
 use serde::{Deserialize, Serialize};
 
+use crate::PauliString;
 use crate::decomposition::{CompleteMeasurementTable, MeasurementTableBuilder};
 use crate::draft_core::{native_rows_for_code, transition};
 use crate::draft_types::{
-    Head, NativeRow, NativeRowMetadata, Tail11, TAIL_MASK, TAIL_QUBITS, TAIL_SPACE_SIZE,
+    Head, NativeRow, NativeRowMetadata, TAIL_MASK, TAIL_QUBITS, TAIL_SPACE_SIZE, Tail11,
 };
 use crate::measurement::CodeMeasurement;
 use crate::measurement::MeasurementChoices;
 use crate::measurement::{GROSS_MEASUREMENT, TWOGROSS_MEASUREMENT};
 use crate::native_measurement::NativeMeasurement;
-use crate::PauliString;
 
 const HEAD_COUNT: usize = 4;
 const TOTAL_QUBITS: usize = 12;
@@ -1331,7 +1331,7 @@ fn histogram_from_beta_costs(beta_costs: &[Option<u32>]) -> ExactHistogramReport
     let median = if reachable_targets == 0 {
         None
     } else {
-        let rank = (reachable_targets + 1) / 2;
+        let rank = reachable_targets.div_ceil(2);
         let mut running = 0u64;
         let mut med = None;
         for (cost, count) in &histogram {
@@ -1967,7 +1967,7 @@ pub fn compute_paper_baseline_exact_hist_with_table(
         .map(|(cost, count)| *cost as u128 * *count as u128)
         .sum();
     let mean = Some(weighted_sum as f64 / reachable_targets as f64);
-    let rank = (reachable_targets + 1) / 2;
+    let rank = reachable_targets.div_ceil(2);
     let mut running = 0u64;
     let mut median = None;
     for (cost, count) in &histogram {
@@ -2363,8 +2363,8 @@ mod tests {
     #[test]
     fn best_single_pivot_monotonicity_on_toy_targets() {
         let fixed = vec![Some(9), Some(7), Some(11), Some(5)];
-        let pivot_2 = vec![Some(8), Some(8), Some(10), Some(7)];
-        let pivot_3 = vec![Some(9), Some(6), Some(12), Some(5)];
+        let pivot_2 = [Some(8), Some(8), Some(10), Some(7)];
+        let pivot_3 = [Some(9), Some(6), Some(12), Some(5)];
         let mut best = vec![None; fixed.len()];
         for idx in 0..fixed.len() {
             best[idx] = option_min_cost(option_min_cost(fixed[idx], pivot_2[idx]), pivot_3[idx]);

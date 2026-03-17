@@ -1,16 +1,4 @@
 {
-  "histogram": {
-    "1": 246,
-    "5": 20741,
-    "7": 7182,
-    "8": 413267,
-    "11": 679860,
-    "13": 47951,
-    "14": 2670088,
-    "15": 329775,
-    "17": 16153,
-    "18": 9041
-  },
   "total_targets": 4194304,
   "reachable_targets": 4194304,
   "unreachable_targets": 0,
@@ -28,5 +16,8 @@
   ],
   "median": 14,
   "mean": 12.952656745910645,
-  "sample_unreachable_tails": []
+  "local_measurement_count_hist": {
+    "4": 3,
+    "6": 9
+  }
 }

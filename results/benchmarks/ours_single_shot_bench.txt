@@ -1,0 +1,7 @@
+benchmark=ours_single_shot_11q
+algorithm=ours-single-shot-11q
+csv=/home/edirent/bicycle-architecture-compiler/native.csv
+pivot_index=0
+exact_hist_ms=20482.519
+summary_ms=20233.769
+pivot_scan_enabled=false

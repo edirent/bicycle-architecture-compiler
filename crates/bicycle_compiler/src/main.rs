@@ -20,8 +20,8 @@ use std::{
 };
 
 use bicycle_cliffords::{
-    CompleteMeasurementTable, MeasurementChoices, MeasurementTableBuilder,
-    compute_paper_baseline_exact_hist_for_choice, infer_measurement_choice_from_csv_path,
+    CompleteMeasurementTable, MeasurementChoices, MeasurementTableBuilder, PaperBaseline11Q,
+    SingleShot11QAlgorithm, infer_measurement_choice_from_csv_path,
     infer_measurement_choice_from_native_rows, native_measurement::NativeMeasurement,
     parse_native_rows_from_csv,
 };
@@ -50,6 +50,12 @@ struct Cli {
     /// Optional dictionary CSV path; currently used to infer gross vs two-gross by file name.
     #[arg(long)]
     csv: Option<PathBuf>,
+    /// Optional override for paper baseline histogram JSON output.
+    #[arg(long)]
+    paper_hist_out: Option<PathBuf>,
+    /// Optional override for paper baseline summary JSON output.
+    #[arg(long)]
+    paper_summary_out: Option<PathBuf>,
     /// The accuracy of small angle synthesis
     #[arg(short, long, default_value_t = AnglePrecision::lit("1e-9"))]
     accuracy: AnglePrecision,
@@ -72,22 +78,54 @@ fn code_tag(choice: MeasurementChoices) -> &'static str {
     }
 }
 
-fn emit_paper_beta_report(choice: MeasurementChoices) -> Result<(), Box<dyn error::Error>> {
-    let report = compute_paper_baseline_exact_hist_for_choice(choice);
+fn ensure_parent_dir(path: &Path) -> Result<(), Box<dyn error::Error>> {
+    if let Some(parent) = path.parent() {
+        if !parent.as_os_str().is_empty() {
+            std::fs::create_dir_all(parent)?;
+        }
+    }
+    Ok(())
+}
+
+fn emit_paper_beta_report(
+    choice: MeasurementChoices,
+    csv_hint: &str,
+    hist_out: Option<&Path>,
+    summary_out: Option<&Path>,
+) -> Result<(), Box<dyn error::Error>> {
     let tag = code_tag(choice);
-    let hist_path = format!("paper_baseline_{tag}_exact_hist.json");
-    let summary_path = format!("paper_baseline_{tag}_summary.json");
+    let default_hist = PathBuf::from(format!(
+        "results/histograms/paper_baseline_{tag}_exact_hist.json"
+    ));
+    let default_summary =
+        PathBuf::from(format!("results/reports/paper_baseline_{tag}_summary.json"));
+    let hist_path = hist_out.unwrap_or(default_hist.as_path());
+    let summary_path = summary_out.unwrap_or(default_summary.as_path());
 
-    let hist_json = serde_json::to_string_pretty(&report.histogram)?;
-    std::fs::write(&hist_path, hist_json)?;
-    let summary_json = serde_json::to_string_pretty(&report)?;
-    std::fs::write(&summary_path, summary_json)?;
+    ensure_parent_dir(hist_path)?;
+    ensure_parent_dir(summary_path)?;
 
-    println!("Wrote paper baseline exact hist: {hist_path}");
-    println!("Wrote paper baseline summary:    {summary_path}");
+    let algorithm = PaperBaseline11Q;
+    let histogram = algorithm.compute_exact_hist(csv_hint, 0)?;
+    let summary = algorithm.compute_summary(csv_hint, 0)?;
+
+    let hist_json = serde_json::to_string_pretty(&histogram)?;
+    std::fs::write(hist_path, hist_json)?;
+    let summary_json = serde_json::to_string_pretty(&summary)?;
+    std::fs::write(summary_path, summary_json)?;
+
+    println!("Wrote paper baseline exact hist: {}", hist_path.display());
+    println!(
+        "Wrote paper baseline summary:    {}",
+        summary_path.display()
+    );
     println!(
         "paper_baseline ({choice}): targets={}, reachable={}, mean={:?}, median={:?}, support={:?}",
-        report.total_targets, report.reachable_targets, report.mean, report.median, report.support
+        summary.total_targets,
+        summary.reachable_targets,
+        summary.mean,
+        summary.median,
+        summary.support
     );
 
     Ok(())
@@ -119,7 +157,16 @@ fn main() -> Result<(), Box<dyn error::Error>> {
             .or(inferred_from_rows)
             .or(inferred)
             .unwrap_or(MeasurementChoices::Gross);
-        return emit_paper_beta_report(choice);
+        let csv_hint = match cli.csv.as_ref() {
+            Some(path) => path.to_string_lossy().into_owned(),
+            None => format!("{}_hint.csv", code_tag(choice)),
+        };
+        return emit_paper_beta_report(
+            choice,
+            &csv_hint,
+            cli.paper_hist_out.as_deref(),
+            cli.paper_summary_out.as_deref(),
+        );
     }
 
     let code = cli
