@@ -70,7 +70,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 buf_out,
                 "{},{},{}",
                 p,
-                meas_impl.base_measurement().measures(),
+                meas_impl.base_witness().target(),
                 meas_impl.rotations().len(),
             )?;
         }
@@ -83,7 +83,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 buf_out,
                 "{},{},{}",
                 p,
-                meas_impl.base_measurement().measures(),
+                meas_impl.base_witness().target(),
                 meas_impl.rotations().len()
             )?;
         }

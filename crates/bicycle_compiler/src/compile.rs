@@ -12,18 +12,181 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use bicycle_cliffords::decomposition::NativeMeasurementImpl;
-use bicycle_cliffords::{CompleteMeasurementTable, PauliString};
+use bicycle_cliffords::decomposition::{MeasurementWitness, NativeMeasurementImpl};
+use bicycle_cliffords::{
+    CompleteMeasurementTable, GROSS_MEASUREMENT, MeasurementTableBuilder, PauliString,
+    native_measurement::NativeMeasurement,
+};
 use bicycle_common::{BicycleISA, Pauli, TGateData, TwoBases};
 
 use crate::language::AnglePrecision;
 use crate::small_angle::SingleRotation;
-use crate::{architecture::PathArchitecture, operation::Operation};
+use crate::{
+    architecture::PathArchitecture,
+    operation::{Operation, Operations},
+};
 
 use crate::basis_changer::BasisChanger;
 use crate::small_angle;
 
 use BicycleISA::{JointMeasure, Measure, TGate};
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct CompiledMeasurementPlan {
+    pub ops: Vec<Operation>,
+    pub logical_result_flip: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct X1DotX8CheckReport {
+    pub requested_basis: Vec<Pauli>,
+    pub target_data_only: PauliString,
+    pub chosen_measures: PauliString,
+    pub pivot_pauli: Pauli,
+    pub base_witness_target: PauliString,
+    pub rotations: Vec<PauliString>,
+    pub operations: Vec<Operation>,
+}
+
+fn x1_dot_x8_requested_basis() -> Vec<Pauli> {
+    use Pauli::{I, X};
+    vec![X, I, I, I, I, I, I, X, I, I, I]
+}
+
+fn x1_dot_x8_target_data_only() -> PauliString {
+    use Pauli::{I, X};
+    let target: [Pauli; 12] = [I, X, I, I, I, I, I, I, X, I, I, I];
+    (&target).into()
+}
+
+fn check_x1_dot_x8_with_table(
+    table: &CompleteMeasurementTable,
+) -> Result<X1DotX8CheckReport, String> {
+    let requested_basis = x1_dot_x8_requested_basis();
+    let target_data_only = x1_dot_x8_target_data_only();
+    let architecture = PathArchitecture::for_qubits(requested_basis.len());
+
+    let meas_impl = table.min_data(target_data_only);
+
+    if meas_impl.measures().zero_pivot() != target_data_only {
+        return Err(format!(
+            "Check (1) failed: meas_impl.measures().zero_pivot() != target_data_only (left={}, right={})",
+            meas_impl.measures().zero_pivot(),
+            target_data_only
+        ));
+    }
+
+    let base_witness = meas_impl.base_witness();
+    if base_witness.primitives().len() != 1 {
+        return Err(format!(
+            "Check (2) failed: expected singleton primitive, found {}",
+            base_witness.primitives().len()
+        ));
+    }
+    if base_witness.single_native_impl().is_none() {
+        return Err(
+            "Check (2) failed: base witness is not a true singleton native wrapper".to_string(),
+        );
+    }
+    let primitive = &base_witness.primitives()[0];
+    if primitive.observable() != base_witness.target() {
+        return Err(format!(
+            "Check (2) failed: primitive.observable() != base_witness.target() (left={}, right={})",
+            primitive.observable(),
+            base_witness.target()
+        ));
+    }
+    let native = primitive
+        .native_measurement()
+        .ok_or_else(|| "Check (2) failed: primitive.native_measurement() is None".to_string())?;
+    let native_target = GROSS_MEASUREMENT.measures(&native);
+    if base_witness.target() != native_target {
+        return Err(format!(
+            "Check (2) failed: base_witness.target() != GROSS_MEASUREMENT.measures(native) (left={}, right={})",
+            base_witness.target(),
+            native_target
+        ));
+    }
+
+    let mut q = base_witness.target();
+    for rot in meas_impl.rotations() {
+        q = q.conjugate_with(rot.measures().zero_pivot());
+    }
+    if q != meas_impl.measures() {
+        return Err(format!(
+            "Check (3) failed: rotation chain did not close (left={}, right={})",
+            q,
+            meas_impl.measures()
+        ));
+    }
+
+    let compiled_ops = compile_measurement(&architecture, table, requested_basis.clone());
+
+    let mut expected_ops: Vec<Operation> = vec![];
+    let p_pivot = meas_impl.measures().get_pauli(0);
+    let block_basis = BlockBases(vec![select_basis_change(Pauli::Y, p_pivot)]);
+    let x1 = TwoBases::new(Pauli::X, Pauli::I).unwrap();
+    let y1 = TwoBases::new(Pauli::Y, Pauli::I).unwrap();
+
+    for rot in meas_impl.rotations() {
+        expected_ops.extend(
+            rotation_instructions(rot)
+                .into_iter()
+                .map(|isa| vec![(0, isa)]),
+        );
+    }
+
+    expected_ops.push(block_basis.change_basis(vec![(0, Measure(x1))]));
+
+    for isa in emit_witness(base_witness) {
+        expected_ops.push(vec![(0, isa)]);
+    }
+
+    let mut middle_ops = ghz_meas(0, 1);
+    middle_ops.push(vec![(0, Measure(y1))]);
+    expected_ops.extend(
+        middle_ops
+            .into_iter()
+            .map(|op| block_basis.change_basis(op)),
+    );
+
+    for rot in meas_impl.rotations().iter().rev() {
+        expected_ops.extend(
+            rotation_instructions(rot)
+                .into_iter()
+                .map(|isa| vec![(0, isa)]),
+        );
+    }
+
+    if compiled_ops != expected_ops {
+        return Err(format!(
+            "Check (4) failed: lowering mismatch.\ncompiled:\n{}\nexpected:\n{}",
+            Operations(compiled_ops.clone()),
+            Operations(expected_ops)
+        ));
+    }
+
+    Ok(X1DotX8CheckReport {
+        requested_basis,
+        target_data_only,
+        chosen_measures: meas_impl.measures(),
+        pivot_pauli: meas_impl.measures().get_pauli(0),
+        base_witness_target: base_witness.target(),
+        rotations: meas_impl
+            .rotations()
+            .iter()
+            .map(|rot| rot.measures())
+            .collect(),
+        operations: compiled_ops,
+    })
+}
+
+pub fn check_x1_dot_x8_compilation() -> Result<X1DotX8CheckReport, String> {
+    let mut builder = MeasurementTableBuilder::new(NativeMeasurement::all(), GROSS_MEASUREMENT);
+    builder.build();
+    let table = builder.complete()?;
+    check_x1_dot_x8_with_table(&table)
+}
 
 /// Construct GHZ state on a path architecture from start to end
 fn ghz_meas(start: usize, blocks: usize) -> Vec<Operation> {
@@ -55,6 +218,10 @@ fn rotation_instructions(native_measurement: &NativeMeasurementImpl) -> [Bicycle
     ops[1..4].copy_from_slice(&native_measurement.implementation());
     ops[4] = Measure(TwoBases::new(p1, Pauli::I).unwrap());
     ops
+}
+
+fn emit_witness(witness: &MeasurementWitness) -> impl Iterator<Item = BicycleISA> + '_ {
+    witness.emit_primitive_instructions()
 }
 
 /// Extend basis to a multiple of 11
@@ -164,7 +331,7 @@ pub fn compile_measurement(
         .enumerate()
         .filter_map(|(i, opt)| opt.as_ref().map(|val| (i, val)))
     {
-        for isa in meas_impl.base_measurement().implementation() {
+        for isa in emit_witness(meas_impl.base_witness()) {
             ops.push(vec![(block_i, isa)]);
         }
     }
@@ -206,6 +373,18 @@ pub fn compile_measurement(
     ops
 }
 
+pub fn compile_measurement_plan(
+    architecture: &PathArchitecture,
+    measurement_table: &CompleteMeasurementTable,
+    basis: Vec<Pauli>,
+    logical_result_flip: bool,
+) -> CompiledMeasurementPlan {
+    CompiledMeasurementPlan {
+        ops: compile_measurement(architecture, measurement_table, basis),
+        logical_result_flip,
+    }
+}
+
 /// Compile a Pauli rotation of some rational angle to Operations
 pub fn compile_rotation(
     architecture: &PathArchitecture,
@@ -218,6 +397,10 @@ pub fn compile_rotation(
     let n = architecture.data_blocks();
     assert!(n > 0);
     let basis = extend_basis(basis);
+    assert!(
+        basis.iter().any(|p| *p != Pauli::I),
+        "compile_rotation does not support all-identity basis"
+    );
 
     let z1 = TwoBases::new(Pauli::Z, Pauli::I).unwrap();
     let x1 = TwoBases::new(Pauli::X, Pauli::I).unwrap();
@@ -284,7 +467,7 @@ pub fn compile_rotation(
         .enumerate()
         .filter_map(|(i, opt)| opt.as_ref().map(|val| (i, val)))
     {
-        for isa in meas_impl.base_measurement().implementation() {
+        for isa in emit_witness(meas_impl.base_witness()) {
             ops.push(vec![(block_i, isa)]);
         }
     }
@@ -298,8 +481,12 @@ pub fn compile_rotation(
     let mut middle_ops = ghz_meas(first_nontrivial, n - first_nontrivial);
 
     // Apply small-angle X(φ) rotation on block n
-    // TODO: Ignore compile-time Clifford corrections
-    let (rots, _cliffords) = small_angle::synthesize_angle_x(angle, accuracy);
+    let (rots, cliffords) = small_angle::synthesize_angle_x(angle, accuracy);
+    if !small_angle::cliffords_are_trivial(&cliffords) {
+        panic!(
+            "compile_rotation does not support nontrivial Clifford corrections (previously silently ignored)"
+        );
+    }
     for rot in rots {
         let tgate_data = match rot {
             SingleRotation::Z { dagger } => TGateData::new(Pauli::Z, false, dagger),
@@ -383,6 +570,23 @@ mod tests {
             .collect()
     }
 
+    fn witness_instructions(block: usize, witness: &MeasurementWitness) -> Vec<Operation> {
+        witness
+            .emit_primitive_instructions()
+            .map(|isa| vec![(block, isa)])
+            .collect()
+    }
+
+    fn panic_message(payload: Box<dyn std::any::Any + Send>) -> String {
+        if let Some(msg) = payload.downcast_ref::<String>() {
+            msg.clone()
+        } else if let Some(msg) = payload.downcast_ref::<&'static str>() {
+            (*msg).to_string()
+        } else {
+            "<non-string panic payload>".to_string()
+        }
+    }
+
     /// Find a random minimal implementation (as given by the measurement table) of a native measurement.
     fn random_min_native_measurement(
         measurement_table: &CompleteMeasurementTable,
@@ -407,7 +611,9 @@ mod tests {
 
             let meas_impl = measurement_table.min_data(p);
             if meas_impl.rotations().is_empty() {
-                native_measurements.push(*meas_impl.base_measurement());
+                if let Some(native) = meas_impl.base_witness().single_native_impl() {
+                    native_measurements.push(native);
+                }
             }
         }
 
@@ -450,6 +656,22 @@ mod tests {
         basis = extend_basis(basis);
         let expected = vec![I, I, I, I, I, Y, I, I, I, I, I];
         assert_eq!(expected, basis);
+    }
+
+    #[test]
+    fn compile_measurement_x1_dot_x8_compiles_correctly() {
+        let report = check_x1_dot_x8_compilation()
+            .unwrap_or_else(|err| panic!("FAIL: X1·X8 does not compile correctly: {err}"));
+
+        assert_eq!(
+            report.requested_basis,
+            vec![X, I, I, I, I, I, I, X, I, I, I]
+        );
+        assert_eq!(
+            report.target_data_only.zero_pivot(),
+            report.target_data_only
+        );
+        assert!(!report.operations.is_empty());
     }
 
     #[test]
@@ -596,7 +818,7 @@ mod tests {
                 // measurements
                 for (block_i, meas_impl) in implementations.iter().enumerate() {
                     expected.extend(
-                        native_instructions(block_i, meas_impl.base_measurement()).into_iter(),
+                        witness_instructions(block_i, meas_impl.base_witness()).into_iter(),
                     );
                 }
                 expected.extend(
@@ -650,6 +872,18 @@ mod tests {
             let mut out = vec![y1; blocks];
             out[blocks - 1] = z1;
             out.into_iter().map(Measure).enumerate().map(|e| vec![e])
+        }
+
+        fn first_nontrivial_clifford_angle() -> Option<AnglePrecision> {
+            let candidates = ["0.1", "-0.1", "0.2", "-0.2", "0.3", "-0.3", "0.05", "-0.05"];
+            for candidate in candidates {
+                let angle = AnglePrecision::lit(candidate);
+                let (_, cliffords) = small_angle::synthesize_angle_x(angle, ACCURACY);
+                if !small_angle::cliffords_are_trivial(&cliffords) {
+                    return Some(angle);
+                }
+            }
+            None
         }
 
         #[test]
@@ -741,7 +975,7 @@ mod tests {
                 // measurements
                 for (block_i, meas_impl) in implementations.iter().enumerate() {
                     expected.extend(
-                        native_instructions(block_i, meas_impl.base_measurement()).into_iter(),
+                        witness_instructions(block_i, meas_impl.base_witness()).into_iter(),
                     );
                 }
 
@@ -777,6 +1011,56 @@ mod tests {
             }
 
             Ok(())
+        }
+
+        #[test]
+        fn compile_rotation_rejects_nontrivial_clifford_corrections() {
+            let angle = first_nontrivial_clifford_angle()
+                .expect("expected at least one candidate to have nontrivial clifford corrections");
+            let arch = PathArchitecture { data_blocks: 1 };
+            let meas = random_min_native_measurement(&GROSS_TABLE);
+            let ps: [Pauli; 12] = meas.measures().into();
+            let basis: Vec<Pauli> = ps[1..].to_vec();
+
+            let panic = std::panic::catch_unwind(|| {
+                let _ = compile_rotation(&arch, &GROSS_TABLE, basis.clone(), angle, ACCURACY);
+            })
+            .expect_err("compile_rotation should reject nontrivial clifford corrections");
+
+            let message = panic_message(panic);
+            assert!(message.contains("nontrivial Clifford corrections"));
+            assert!(message.contains("silently ignored"));
+        }
+
+        #[test]
+        fn compile_rotation_keeps_working_when_clifford_corrections_are_trivial() {
+            let (_, cliffords) = small_angle::synthesize_angle_x(small_angle::T_ANGLE, ACCURACY);
+            assert!(small_angle::cliffords_are_trivial(&cliffords));
+
+            let arch = PathArchitecture { data_blocks: 1 };
+            let meas = random_min_native_measurement(&GROSS_TABLE);
+            let ps: [Pauli; 12] = meas.measures().into();
+            let basis: Vec<Pauli> = ps[1..].to_vec();
+
+            let _ = compile_rotation(&arch, &GROSS_TABLE, basis, small_angle::T_ANGLE, ACCURACY);
+        }
+
+        #[test]
+        fn compile_rotation_rejects_all_identity_basis() {
+            let arch = PathArchitecture { data_blocks: 1 };
+            let panic = std::panic::catch_unwind(|| {
+                let _ = compile_rotation(
+                    &arch,
+                    &GROSS_TABLE,
+                    vec![Pauli::I; 11],
+                    small_angle::T_ANGLE,
+                    ACCURACY,
+                );
+            })
+            .expect_err("all-identity rotation basis should be rejected");
+
+            let message = panic_message(panic);
+            assert!(message.contains("all-identity basis"));
         }
     }
 }

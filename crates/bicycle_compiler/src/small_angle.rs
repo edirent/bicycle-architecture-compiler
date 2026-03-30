@@ -156,6 +156,88 @@ pub enum CliffordGate {
     W,
 }
 
+#[derive(Debug, Copy, Clone, Eq, PartialEq)]
+struct SignedPauli {
+    pauli: Pauli,
+    negative: bool,
+}
+
+impl SignedPauli {
+    fn new(pauli: Pauli) -> Self {
+        Self {
+            pauli,
+            negative: false,
+        }
+    }
+}
+
+fn apply_clifford(pauli: SignedPauli, gate: CliffordGate) -> SignedPauli {
+    let SignedPauli {
+        pauli: p,
+        negative: neg,
+    } = pauli;
+    match gate {
+        CliffordGate::H => match p {
+            Pauli::I => pauli,
+            Pauli::X => SignedPauli {
+                pauli: Pauli::Z,
+                negative: neg,
+            },
+            Pauli::Z => SignedPauli {
+                pauli: Pauli::X,
+                negative: neg,
+            },
+            Pauli::Y => SignedPauli {
+                pauli: Pauli::Y,
+                negative: !neg,
+            },
+        },
+        CliffordGate::S => match p {
+            Pauli::I => pauli,
+            Pauli::X => SignedPauli {
+                pauli: Pauli::Y,
+                negative: neg,
+            },
+            Pauli::Y => SignedPauli {
+                pauli: Pauli::X,
+                negative: !neg,
+            },
+            Pauli::Z => SignedPauli {
+                pauli: Pauli::Z,
+                negative: neg,
+            },
+        },
+        CliffordGate::X => match p {
+            Pauli::I => pauli,
+            Pauli::X => SignedPauli {
+                pauli: Pauli::X,
+                negative: neg,
+            },
+            Pauli::Y => SignedPauli {
+                pauli: Pauli::Y,
+                negative: !neg,
+            },
+            Pauli::Z => SignedPauli {
+                pauli: Pauli::Z,
+                negative: !neg,
+            },
+        },
+        // W is a global phase and therefore never changes Pauli conjugation.
+        CliffordGate::W => pauli,
+    }
+}
+
+/// Check whether a sequence of deterministic Clifford corrections is identity up to global phase.
+pub fn cliffords_are_trivial(cliffords: &[CliffordGate]) -> bool {
+    let mut image_x = SignedPauli::new(Pauli::X);
+    let mut image_z = SignedPauli::new(Pauli::Z);
+    for cliff in cliffords {
+        image_x = apply_clifford(image_x, *cliff);
+        image_z = apply_clifford(image_z, *cliff);
+    }
+    image_x == SignedPauli::new(Pauli::X) && image_z == SignedPauli::new(Pauli::Z)
+}
+
 impl TryFrom<char> for CliffordGate {
     type Error = io::Error;
 
@@ -327,6 +409,14 @@ mod test {
         let (rots, cliffords) = synthesize_angle_x(-T_ANGLE, AnglePrecision::lit("1e-6"));
         assert_eq!(rots, vec![SingleRotation::X { dagger: true }]);
         assert_eq!(cliffords, vec![CliffordGate::H, CliffordGate::H]);
+    }
+
+    #[test]
+    fn clifford_triviality_detects_identity_and_nonidentity() {
+        assert!(cliffords_are_trivial(&[CliffordGate::H, CliffordGate::H]));
+        assert!(cliffords_are_trivial(&[]));
+        assert!(!cliffords_are_trivial(&[CliffordGate::S]));
+        assert!(!cliffords_are_trivial(&[CliffordGate::X]));
     }
 
     #[test]

@@ -70,7 +70,10 @@ pub use single_shot_11q::{
 };
 
 pub mod decomposition;
-pub use decomposition::{CompleteMeasurementTable, MeasurementTableBuilder};
+pub use decomposition::{
+    ByproductEffect, CompleteMeasurementTable, FrameState, MeasurementTableBuilder,
+    MeasurementWitness, NativePrimitive, NativePrimitiveKind, OutcomeReducer, ResourceSet,
+};
 
 pub mod csv_input;
 pub use csv_input::resolve_csv_path;

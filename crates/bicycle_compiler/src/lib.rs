@@ -15,12 +15,33 @@
 mod architecture;
 mod basis_changer;
 mod compile;
+pub mod demo;
 pub mod language;
 pub mod operation;
 pub mod optimize;
+<<<<<<< Updated upstream
 mod small_angle;
 
 pub use architecture::PathArchitecture;
+=======
+pub mod random_check;
+pub mod small_angle;
+
+use std::{error::Error, path::Path};
+
+pub use architecture::PathArchitecture;
+use bicycle_cliffords::CompleteMeasurementTable;
+pub use compile::{CompiledMeasurementPlan, X1DotX8CheckReport, check_x1_dot_x8_compilation};
+pub use random_check::{
+    RandomCircuitCheckConfig, RandomCircuitCheckReport, RandomCircuitCheckSummary,
+    run_random_circuit_checks,
+};
+
+pub fn deserialize_table(cache_path: &Path) -> Result<CompleteMeasurementTable, Box<dyn Error>> {
+    let read = std::fs::read(cache_path)?;
+    Ok(bitcode::deserialize::<CompleteMeasurementTable>(&read)?)
+}
+>>>>>>> Stashed changes
 
 #[cfg(test)]
 mod test {
@@ -33,10 +54,18 @@ mod test {
     use bicycle_cliffords::{
         MeasurementTableBuilder, TWOGROSS_MEASUREMENT, native_measurement::NativeMeasurement,
     };
-    use operation::Operations;
+    use bicycle_common::Pauli;
+
+    fn build_table() -> Result<CompleteMeasurementTable, String> {
+        let mut builder =
+            MeasurementTableBuilder::new(NativeMeasurement::all(), TWOGROSS_MEASUREMENT);
+        builder.build();
+        builder.complete()
+    }
 
     #[test]
-    fn integration_test_rotation() -> Result<(), Box<dyn Error>> {
+    fn integration_test_rotation_rejects_nontrivial_clifford_corrections()
+    -> Result<(), Box<dyn Error>> {
         let program = r#"[
                                     {
                                         "Rotation": {
@@ -62,26 +91,81 @@ mod test {
         dbg!(&parsed);
         assert_eq!(1, parsed.len());
 
-        let mut builder =
-            MeasurementTableBuilder::new(NativeMeasurement::all(), TWOGROSS_MEASUREMENT);
-        builder.build();
-        let measurement_table = builder.complete()?;
+        let measurement_table = build_table()?;
 
         let architecture = PathArchitecture { data_blocks: 2 };
-        let compiled: Vec<_> = parsed
-            .into_iter()
-            .flat_map(|op| {
-                op.compile(
-                    &architecture,
-                    &measurement_table,
-                    AnglePrecision::lit("1e-16"),
-                )
-            })
-            .collect();
-        let ops = Operations(compiled);
+        let panic = std::panic::catch_unwind(|| {
+            let _compiled: Vec<_> = parsed
+                .into_iter()
+                .flat_map(|op| {
+                    op.compile(
+                        &architecture,
+                        &measurement_table,
+                        AnglePrecision::lit("1e-16"),
+                    )
+                })
+                .collect();
+        })
+        .expect_err("rotation with nontrivial clifford corrections should be rejected");
 
-        println!("{ops}");
+        let message = if let Some(msg) = panic.downcast_ref::<String>() {
+            msg.clone()
+        } else if let Some(msg) = panic.downcast_ref::<&'static str>() {
+            (*msg).to_string()
+        } else {
+            "<non-string panic payload>".to_string()
+        };
+        assert!(message.contains("nontrivial Clifford corrections"));
 
         Ok(())
+    }
+
+    #[test]
+    fn integration_test_measurement_plan_preserves_flip_sidecar() -> Result<(), Box<dyn Error>> {
+        let measurement_table = build_table()?;
+        let architecture = PathArchitecture { data_blocks: 1 };
+
+        let with_flip = PbcOperation::Measurement {
+            basis: vec![Pauli::X],
+            flip_result: true,
+        };
+        let plan = with_flip
+            .compile_measurement_plan(&architecture, &measurement_table)
+            .expect("measurement op should produce a sidecar plan");
+        assert!(plan.logical_result_flip);
+
+        let without_flip = PbcOperation::Measurement {
+            basis: vec![Pauli::X],
+            flip_result: false,
+        };
+        assert_eq!(
+            without_flip.compile(
+                &architecture,
+                &measurement_table,
+                AnglePrecision::lit("1e-16")
+            ),
+            plan.ops
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    #[should_panic(
+        expected = "flip_result=true is not supported by legacy PbcOperation::compile; use PbcOperation::compile_measurement_plan"
+    )]
+    fn integration_test_legacy_compile_rejects_flip_result() {
+        let measurement_table = build_table().expect("table should build");
+        let architecture = PathArchitecture { data_blocks: 1 };
+        let op = PbcOperation::Measurement {
+            basis: vec![Pauli::X],
+            flip_result: true,
+        };
+
+        let _ = op.compile(
+            &architecture,
+            &measurement_table,
+            AnglePrecision::lit("1e-16"),
+        );
     }
 }
