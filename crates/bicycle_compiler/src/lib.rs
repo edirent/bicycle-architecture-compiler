@@ -15,16 +15,9 @@
 mod architecture;
 mod basis_changer;
 mod compile;
-pub mod demo;
 pub mod language;
 pub mod operation;
 pub mod optimize;
-<<<<<<< Updated upstream
-mod small_angle;
-
-pub use architecture::PathArchitecture;
-=======
-pub mod random_check;
 pub mod small_angle;
 
 use std::{error::Error, path::Path};
@@ -32,16 +25,11 @@ use std::{error::Error, path::Path};
 pub use architecture::PathArchitecture;
 use bicycle_cliffords::CompleteMeasurementTable;
 pub use compile::{CompiledMeasurementPlan, X1DotX8CheckReport, check_x1_dot_x8_compilation};
-pub use random_check::{
-    RandomCircuitCheckConfig, RandomCircuitCheckReport, RandomCircuitCheckSummary,
-    run_random_circuit_checks,
-};
 
 pub fn deserialize_table(cache_path: &Path) -> Result<CompleteMeasurementTable, Box<dyn Error>> {
     let read = std::fs::read(cache_path)?;
     Ok(bitcode::deserialize::<CompleteMeasurementTable>(&read)?)
 }
->>>>>>> Stashed changes
 
 #[cfg(test)]
 mod test {

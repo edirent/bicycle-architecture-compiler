@@ -1,0 +1,61 @@
+{
+  "basis_gates": [
+    "rz",
+    "t",
+    "tdg",
+    "id",
+    "x",
+    "y",
+    "z",
+    "h",
+    "s",
+    "sdg",
+    "sx",
+    "sxdg",
+    "cx",
+    "cz",
+    "cy",
+    "swap",
+    "iswap",
+    "ecr",
+    "dcx"
+  ],
+  "converted_depth": 1307,
+  "converted_num_clbits": 0,
+  "converted_ops": {
+    "ccx": 1080,
+    "cx": 870,
+    "x": 7
+  },
+  "include_final_measurements": false,
+  "litinski_fix_clifford": false,
+  "logical_qubits": 75,
+  "optimization_level": 0,
+  "original_cx_count": 870,
+  "original_depth": 1308,
+  "original_num_clbits": 15,
+  "original_ops": {
+    "ccx": 1080,
+    "cx": 870,
+    "measure": 15,
+    "x": 7
+  },
+  "original_rz_count": 0,
+  "pbc_depth": 3565,
+  "pbc_instruction_count": 7560,
+  "pbc_measurement_count": 0,
+  "pbc_rotation_count": 7560,
+  "python_version": "3.13.5",
+  "qasm_path": "/home/edirent/bicycle-architecture-compiler/external/QASMBench/large/multiplier_n75/multiplier_n75.qasm",
+  "qiskit_version": "2.3.0",
+  "removed_final_measurements": true,
+  "transpiled_depth": 6771,
+  "transpiled_ops": {
+    "cx": 7350,
+    "h": 2160,
+    "t": 4320,
+    "tdg": 3240,
+    "x": 7
+  },
+  "transpiled_rz_count": 0
+}

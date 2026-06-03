@@ -1,0 +1,14 @@
+{
+  "automorphism": 42966,
+  "gross_modules": 6,
+  "in_module_measure": 91795,
+  "inter_module_code_code": 29295,
+  "inter_module_including_factory": 29295,
+  "isa_lines": 5859,
+  "isa_steps": 164056,
+  "joint_measure_halves_raw": 58590,
+  "logical_qubits": 63,
+  "parse_errors": 0,
+  "t_injection": 0,
+  "warnings": []
+}

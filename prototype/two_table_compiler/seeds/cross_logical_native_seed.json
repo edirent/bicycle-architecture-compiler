@@ -1,0 +1,21 @@
+{
+  "entries": [
+    {
+      "native_id": "cross_logical_native_x1p_x1p_prime",
+      "frame_id": "gross_native_11q_pivot0",
+      "head": "X",
+      "tail": "XIIIIIIXIII",
+      "scope": "cross_logical_block_native",
+      "support": [
+        "sheet:P:q1",
+        "sheet:P':q1"
+      ],
+      "metadata": {
+        "logical_canonical": "X1P⊗X1P'",
+        "logical_aliases": "X1P*X1P';X1P X1P'",
+        "native_shift_cost": "0",
+        "source_kind": "cross_logical_native_seed"
+      }
+    }
+  ]
+}

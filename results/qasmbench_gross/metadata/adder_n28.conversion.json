@@ -1,0 +1,62 @@
+{
+  "basis_gates": [
+    "rz",
+    "t",
+    "tdg",
+    "id",
+    "x",
+    "y",
+    "z",
+    "h",
+    "s",
+    "sdg",
+    "sx",
+    "sxdg",
+    "cx",
+    "cz",
+    "cy",
+    "swap",
+    "iswap",
+    "ecr",
+    "dcx"
+  ],
+  "converted_depth": 41,
+  "converted_num_clbits": 28,
+  "converted_ops": {
+    "ccx": 24,
+    "cx": 51,
+    "x": 13
+  },
+  "include_final_measurements": false,
+  "litinski_fix_clifford": false,
+  "logical_qubits": 28,
+  "optimization_level": 0,
+  "original_cx_count": 51,
+  "original_depth": 42,
+  "original_num_clbits": 56,
+  "original_ops": {
+    "barrier": 1,
+    "ccx": 24,
+    "cx": 51,
+    "measure": 28,
+    "x": 13
+  },
+  "original_rz_count": 0,
+  "pbc_depth": 116,
+  "pbc_instruction_count": 168,
+  "pbc_measurement_count": 0,
+  "pbc_rotation_count": 168,
+  "python_version": "3.13.5",
+  "qasm_path": "/home/edirent/bicycle-architecture-compiler/external/QASMBench/large/adder_n28/adder_n28.qasm",
+  "qiskit_version": "2.3.0",
+  "removed_final_measurements": true,
+  "transpiled_depth": 189,
+  "transpiled_ops": {
+    "cx": 195,
+    "h": 48,
+    "t": 96,
+    "tdg": 72,
+    "x": 13
+  },
+  "transpiled_rz_count": 0
+}

@@ -122,6 +122,100 @@ pub struct ExactHistogramReport {
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SingleShotBuildProfile {
+    pub node_count: u64,
+    pub p0_source_count: u64,
+    pub p2_source_count: u64,
+    pub axis_count: u64,
+    pub reachable_tail_count: u64,
+    pub unreachable_tail_count: u64,
+    pub mean_cost: Option<f64>,
+    pub min_cost: Option<u32>,
+    pub max_cost: Option<u32>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SingleShotExactTableReport {
+    pub tail_costs: Vec<Option<u32>>,
+    pub best_heads: Vec<Option<Head>>,
+    pub histogram: ExactHistogramReport,
+    pub profile: SingleShotBuildProfile,
+}
+
+#[derive(Debug, Clone, Copy, Eq, PartialEq, Ord, PartialOrd, Serialize, Deserialize)]
+pub enum WeightedAuditSourceKind {
+    P0,
+    P2,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SingleShotTailProvenanceRecord {
+    pub tail_id: u32,
+    pub tail_pauli: String,
+    pub dist_x: Option<u32>,
+    pub dist_y: Option<u32>,
+    pub dist_z: Option<u32>,
+    pub best_head: Option<Head>,
+    pub final_cost: Option<u32>,
+    pub source_kind: Option<WeightedAuditSourceKind>,
+    pub source_head: Option<Head>,
+    pub source_cost: Option<u32>,
+    pub p3_hop_count: u32,
+    pub p3_weights: Vec<u8>,
+    pub reconstructed_path_length: u32,
+    pub model_b_cost: Option<u32>,
+    pub path_signature: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct WeightedAuditCostAlphabetReport {
+    pub p0_source_cost_hist: BTreeMap<u32, u64>,
+    pub p2_source_cost_hist: BTreeMap<u32, u64>,
+    pub p3_valid_graph_edge_weight_hist: BTreeMap<u32, u64>,
+    pub p3_best_path_weight_hist: BTreeMap<u32, u64>,
+    pub p0_source_unit: String,
+    pub p2_source_unit: String,
+    pub p3_transition_unit: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct WeightedAuditConditionalHistogramReport {
+    pub overall_current_histogram: BTreeMap<u32, u64>,
+    pub current_by_source_kind: BTreeMap<String, BTreeMap<u32, u64>>,
+    pub current_by_p3_hop_count: BTreeMap<u32, BTreeMap<u32, u64>>,
+    pub current_bucket_path_signatures: BTreeMap<u32, BTreeMap<String, u64>>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct WeightedAuditModelCompareReport {
+    pub model_a_name: String,
+    pub model_a_histogram: BTreeMap<u32, u64>,
+    pub model_a_mean: Option<f64>,
+    pub model_a_support: Vec<u32>,
+    pub model_b_name: String,
+    pub model_b_note: String,
+    pub model_b_histogram: BTreeMap<u32, u64>,
+    pub model_b_mean: Option<f64>,
+    pub model_b_support: Vec<u32>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct WeightedAuditSamplePath {
+    pub label: String,
+    pub provenance: SingleShotTailProvenanceRecord,
+    pub path: Vec<SingleShotPathNode>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SingleShotWeightedAuditReport {
+    pub profile: SingleShotBuildProfile,
+    pub cost_alphabet: WeightedAuditCostAlphabetReport,
+    pub conditional_histograms: WeightedAuditConditionalHistogramReport,
+    pub model_compare: WeightedAuditModelCompareReport,
+    pub sample_paths: Vec<WeightedAuditSamplePath>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SafePivotTransformationReport {
     pub name: String,
     pub shift_x: u8,
@@ -258,10 +352,36 @@ enum PathPred {
     },
 }
 
+const PRED_UNREACHED: u32 = u32::MAX;
+const PRED_SOURCE: u32 = u32::MAX - 1;
+const PRED_AXIS_NONE: u16 = u16::MAX;
+
+#[derive(Debug, Clone)]
+struct SolveAllStateAudit {
+    dist: Vec<u32>,
+    pred_prev_state: Vec<u32>,
+    pred_axis_idx: Vec<u16>,
+    valid_graph_edge_weight_hist: BTreeMap<u32, u64>,
+}
+
+#[derive(Debug, Clone)]
+struct ProvenanceTrace {
+    source_kind: WeightedAuditSourceKind,
+    source_head: Head,
+    source_cost: u32,
+    p3_weights: Vec<u8>,
+    reconstructed_path_length: u32,
+    model_b_cost: u32,
+    path_signature: String,
+}
+
 #[derive(Debug, Clone, Copy)]
 struct SymmetryAction {
     shift_x: u8,
     shift_y: u8,
+    // Compact row-major GF(2) matrices for the primal and dual halves of the
+    // automorphism. Bit col in x_rows[row] says whether input X_col contributes
+    // to output X_row; z_rows is the same representation for Z support.
     x_rows: [u8; BLOCK_QUBITS],
     z_rows: [u8; BLOCK_QUBITS],
 }
@@ -294,6 +414,13 @@ fn head_from_index(index: usize) -> Head {
         2 => Head::Y,
         3 => Head::Z,
         _ => panic!("Invalid head index: {index}"),
+    }
+}
+
+fn audit_source_kind_label(kind: WeightedAuditSourceKind) -> &'static str {
+    match kind {
+        WeightedAuditSourceKind::P0 => "P0",
+        WeightedAuditSourceKind::P2 => "P2",
     }
 }
 
@@ -419,6 +546,8 @@ fn full_paulis_from_tail_with_pivot_head(
 fn apply_rows_to_bits(rows: &[u8; BLOCK_QUBITS], bits: u8) -> u8 {
     let mut out = 0u8;
     for (row_idx, row_mask) in rows.iter().copied().enumerate() {
+        // GF(2) row-vector multiply: the output bit is the parity of the
+        // selected input columns.
         let parity = (row_mask & bits).count_ones() & 1;
         out |= (parity as u8) << row_idx;
     }
@@ -455,6 +584,9 @@ fn write_block_bits(paulis: &mut [Pauli; TOTAL_QUBITS], offset: usize, x: u8, z:
 impl SymmetryAction {
     fn from_shift(code: CodeMeasurement, shift_x: u8, shift_y: u8) -> Self {
         let shift = AutomorphismData::new(shift_x, shift_y);
+        // Build the same X/Z action as CodeMeasurement::measures, but pack
+        // each 6-bit matrix row into a u8 so pivot certification can apply many
+        // candidate shifts without paying nalgebra allocation costs.
         let action = |a: AutomorphismData| {
             (code.mx.pow(u32::from(a.get_x())) * code.my.pow(u32::from(a.get_y()))).map(|v| v % 2)
         };
@@ -1233,14 +1365,19 @@ fn insert_source(
     }
 }
 
-fn solve_all_state_costs(model: &SingleShotModel) -> Vec<u32> {
+fn solve_all_state_costs_with_audit(model: &SingleShotModel) -> SolveAllStateAudit {
     let state_count = HEAD_COUNT * TAIL_SPACE_SIZE as usize;
     let mut dist = vec![INF_COST; state_count];
+    let mut pred_prev_state = vec![PRED_UNREACHED; state_count];
+    let mut pred_axis_idx = vec![PRED_AXIS_NONE; state_count];
+    let mut valid_graph_edge_weight_hist = BTreeMap::new();
     let mut heap = BinaryHeap::new();
 
     for (state_idx, source) in &model.source_states {
         if source.total_cost < dist[*state_idx] {
             dist[*state_idx] = source.total_cost;
+            pred_prev_state[*state_idx] = PRED_SOURCE;
+            pred_axis_idx[*state_idx] = PRED_AXIS_NONE;
             heap.push(HeapItem {
                 total_cost: source.total_cost,
                 state_idx: *state_idx,
@@ -1258,16 +1395,21 @@ fn solve_all_state_costs(model: &SingleShotModel) -> Vec<u32> {
         let tail_x = tail_bits & TAIL_MASK;
         let tail_z = tail_bits >> TAIL_QUBITS;
 
-        for axis in &model.axes {
+        for (axis_idx, axis) in model.axes.iter().enumerate() {
             if !tails_anticommute(tail_x, tail_z, axis.x_bits, axis.z_bits) {
                 continue;
             }
             let (next_head_idx, delta_local) = model.transition_table[head_idx][axis.q_basis_idx];
+            *valid_graph_edge_weight_hist
+                .entry(delta_local as u32)
+                .or_insert(0) += 1;
             let next_tail_bits = tail_bits ^ axis.tail_bits;
             let next_state_idx = next_head_idx * TAIL_SPACE_SIZE as usize + next_tail_bits as usize;
             let next_cost = item.total_cost + delta_local as u32;
             if next_cost < dist[next_state_idx] {
                 dist[next_state_idx] = next_cost;
+                pred_prev_state[next_state_idx] = item.state_idx as u32;
+                pred_axis_idx[next_state_idx] = axis_idx as u16;
                 heap.push(HeapItem {
                     total_cost: next_cost,
                     state_idx: next_state_idx,
@@ -1276,7 +1418,16 @@ fn solve_all_state_costs(model: &SingleShotModel) -> Vec<u32> {
         }
     }
 
-    dist
+    SolveAllStateAudit {
+        dist,
+        pred_prev_state,
+        pred_axis_idx,
+        valid_graph_edge_weight_hist,
+    }
+}
+
+fn solve_all_state_costs(model: &SingleShotModel) -> Vec<u32> {
+    solve_all_state_costs_with_audit(model).dist
 }
 
 fn beta_for_tail(dist: &[u32], tail: Tail11) -> Option<u32> {
@@ -1294,6 +1445,33 @@ fn beta_costs_from_distances(dist: &[u32]) -> Vec<Option<u32>> {
         out.push(beta_for_tail(dist, Tail11::new(tail_bits)));
     }
     out
+}
+
+fn beta_costs_and_best_heads_from_distances(dist: &[u32]) -> (Vec<Option<u32>>, Vec<Option<Head>>) {
+    let mut costs = Vec::with_capacity(TAIL_SPACE_SIZE as usize);
+    let mut heads = Vec::with_capacity(TAIL_SPACE_SIZE as usize);
+
+    for tail_bits in 0..TAIL_SPACE_SIZE {
+        let mut best_cost = INF_COST;
+        let mut best_head = None;
+        for head in NON_I_HEADS {
+            let idx = state_index(head, tail_bits);
+            let cost = dist[idx];
+            if cost < best_cost {
+                best_cost = cost;
+                best_head = Some(head);
+            }
+        }
+        if best_cost < INF_COST {
+            costs.push(Some(best_cost));
+            heads.push(best_head);
+        } else {
+            costs.push(None);
+            heads.push(None);
+        }
+    }
+
+    (costs, heads)
 }
 
 fn histogram_from_beta_costs(beta_costs: &[Option<u32>]) -> ExactHistogramReport {
@@ -1359,6 +1537,144 @@ fn histogram_from_beta_costs(beta_costs: &[Option<u32>]) -> ExactHistogramReport
 fn histogram_from_distances(dist: &[u32]) -> ExactHistogramReport {
     let beta_costs = beta_costs_from_distances(dist);
     histogram_from_beta_costs(&beta_costs)
+}
+
+fn reachable_cost(dist: &[u32], state_idx: usize) -> Option<u32> {
+    let cost = dist[state_idx];
+    (cost < INF_COST).then_some(cost)
+}
+
+fn mean_from_histogram(histogram: &BTreeMap<u32, u64>) -> Option<f64> {
+    let total: u64 = histogram.values().sum();
+    if total == 0 {
+        return None;
+    }
+    let weighted_sum: u128 = histogram
+        .iter()
+        .map(|(cost, count)| *cost as u128 * *count as u128)
+        .sum();
+    Some(weighted_sum as f64 / total as f64)
+}
+
+fn source_kind_from_witness(witness: SingleShotSourceWitness) -> WeightedAuditSourceKind {
+    match witness {
+        SingleShotSourceWitness::P0I { .. } | SingleShotSourceWitness::P0Q { .. } => {
+            WeightedAuditSourceKind::P0
+        }
+        SingleShotSourceWitness::P2 { .. } => WeightedAuditSourceKind::P2,
+    }
+}
+
+fn trace_provenance_for_state(
+    model: &SingleShotModel,
+    solved: &SolveAllStateAudit,
+    state_idx: usize,
+) -> Option<ProvenanceTrace> {
+    let mut cursor = state_idx;
+    let mut p3_weights = Vec::new();
+
+    loop {
+        let pred_prev = solved.pred_prev_state.get(cursor).copied()?;
+        match pred_prev {
+            PRED_UNREACHED => return None,
+            PRED_SOURCE => {
+                let source = model.source_states.get(&cursor)?;
+                let source_kind = source_kind_from_witness(source.witness);
+                let source_head = decode_state(cursor).0;
+                p3_weights.reverse();
+                let model_b_cost =
+                    source.total_cost + 6 * u32::try_from(p3_weights.len()).ok()?;
+                let path_signature = format!(
+                    "{}@{}:{}+{:?}",
+                    audit_source_kind_label(source_kind),
+                    source_head,
+                    source.total_cost,
+                    p3_weights
+                );
+                return Some(ProvenanceTrace {
+                    source_kind,
+                    source_head,
+                    source_cost: source.total_cost,
+                    reconstructed_path_length: u32::try_from(p3_weights.len() + 1).ok()?,
+                    model_b_cost,
+                    p3_weights,
+                    path_signature,
+                });
+            }
+            prev_state_idx => {
+                let axis_idx = *solved.pred_axis_idx.get(cursor)?;
+                if axis_idx == PRED_AXIS_NONE {
+                    return None;
+                }
+                let axis = model.axes.get(axis_idx as usize)?;
+                let prev_head = decode_state(prev_state_idx as usize).0;
+                let (_, delta_local) =
+                    model.transition_table[head_index(prev_head)][axis.q_basis_idx];
+                p3_weights.push(delta_local);
+                cursor = prev_state_idx as usize;
+            }
+        }
+    }
+}
+
+fn reconstruct_path_from_solution(
+    model: &SingleShotModel,
+    solved: &SolveAllStateAudit,
+    state_idx: usize,
+) -> Option<Vec<SingleShotPathNode>> {
+    let mut reverse_path = Vec::new();
+    let mut cursor = state_idx;
+
+    loop {
+        let total_cost = *solved.dist.get(cursor)?;
+        if total_cost >= INF_COST {
+            return None;
+        }
+        let (head, tail_bits) = decode_state(cursor);
+        let tail = Tail11::new(tail_bits);
+
+        match *solved.pred_prev_state.get(cursor)? {
+            PRED_UNREACHED => return None,
+            PRED_SOURCE => {
+                let source = model.source_states.get(&cursor)?;
+                reverse_path.push(SingleShotPathNode {
+                    head,
+                    tail,
+                    total_cost,
+                    witness: SingleShotPathWitness::Source(source.witness),
+                });
+                break;
+            }
+            prev_state_idx => {
+                let axis_idx = *solved.pred_axis_idx.get(cursor)?;
+                if axis_idx == PRED_AXIS_NONE {
+                    return None;
+                }
+                let axis = model.axes.get(axis_idx as usize)?;
+                let (prev_head, prev_tail_bits) = decode_state(prev_state_idx as usize);
+                let (_, delta_local_measurement_count) =
+                    model.transition_table[head_index(prev_head)][axis.q_basis_idx];
+                reverse_path.push(SingleShotPathNode {
+                    head,
+                    tail,
+                    total_cost,
+                    witness: SingleShotPathWitness::P3 {
+                        prev_head,
+                        prev_tail: Tail11::new(prev_tail_bits),
+                        q_basis: axis.q_basis,
+                        axis_tail: axis.tail,
+                        next_head: head,
+                        delta_local_measurement_count,
+                        native_index: axis.native_index,
+                    },
+                });
+                cursor = prev_state_idx as usize;
+            }
+        }
+    }
+
+    reverse_path.reverse();
+    Some(reverse_path)
 }
 
 fn explain_target_with_model(
@@ -1521,12 +1837,279 @@ pub fn compute_ours_single_shot_exact_hist_from_native_rows(
     histogram_from_distances(&dist)
 }
 
-fn compute_ours_single_shot_tail_costs_from_native_rows(
+pub fn compute_ours_single_shot_tail_costs_from_native_rows(
     native_rows: &[NativeRow],
 ) -> Vec<Option<u32>> {
     let model = SingleShotModel::from_native_rows(native_rows);
     let dist = solve_all_state_costs(&model);
     beta_costs_from_distances(&dist)
+}
+
+fn count_p2_direct_templates(native_rows: &[NativeRow]) -> u64 {
+    let mut count = 0u64;
+    for q_basis in NON_I_HEADS {
+        let bucket: Vec<_> = native_rows
+            .iter()
+            .copied()
+            .filter(|row| row.head == q_basis)
+            .collect();
+        for i in 0..bucket.len() {
+            for j in (i + 1)..bucket.len() {
+                if tails_commute(bucket[i].tail.0, bucket[j].tail.0) {
+                    count += 1;
+                }
+            }
+        }
+    }
+    count
+}
+
+pub fn compute_ours_single_shot_exact_table_from_native_rows(
+    native_rows: &[NativeRow],
+) -> SingleShotExactTableReport {
+    let model = SingleShotModel::from_native_rows(native_rows);
+    let dist = solve_all_state_costs(&model);
+    let histogram = histogram_from_distances(&dist);
+    let (tail_costs, best_heads) = beta_costs_and_best_heads_from_distances(&dist);
+    let min_cost = histogram.histogram.keys().next().copied();
+    let max_cost = histogram.histogram.keys().next_back().copied();
+
+    SingleShotExactTableReport {
+        tail_costs,
+        best_heads,
+        profile: SingleShotBuildProfile {
+            node_count: (HEAD_COUNT as u64) * (TAIL_SPACE_SIZE as u64),
+            p0_source_count: native_rows.len() as u64,
+            p2_source_count: count_p2_direct_templates(native_rows),
+            axis_count: model.axes.len() as u64,
+            reachable_tail_count: histogram.reachable_targets,
+            unreachable_tail_count: histogram.unreachable_targets,
+            mean_cost: histogram.mean,
+            min_cost,
+            max_cost,
+        },
+        histogram,
+    }
+}
+
+pub fn compute_ours_single_shot_weighted_audit_from_native_rows<F>(
+    native_rows: &[NativeRow],
+    mut visit_provenance: F,
+) -> SingleShotWeightedAuditReport
+where
+    F: FnMut(&SingleShotTailProvenanceRecord),
+{
+    let model = SingleShotModel::from_native_rows(native_rows);
+    let solved = solve_all_state_costs_with_audit(&model);
+    let histogram = histogram_from_distances(&solved.dist);
+
+    let mut p0_source_cost_hist = BTreeMap::new();
+    let mut p2_source_cost_hist = BTreeMap::new();
+    for source in model.source_states.values() {
+        match source_kind_from_witness(source.witness) {
+            WeightedAuditSourceKind::P0 => {
+                *p0_source_cost_hist.entry(source.total_cost).or_insert(0) += 1;
+            }
+            WeightedAuditSourceKind::P2 => {
+                *p2_source_cost_hist.entry(source.total_cost).or_insert(0) += 1;
+            }
+        }
+    }
+
+    let mut overall_current_histogram = BTreeMap::new();
+    let mut current_by_source_kind: BTreeMap<String, BTreeMap<u32, u64>> = BTreeMap::new();
+    let mut current_by_p3_hop_count: BTreeMap<u32, BTreeMap<u32, u64>> = BTreeMap::new();
+    let mut current_bucket_path_signatures: BTreeMap<u32, BTreeMap<String, u64>> = BTreeMap::new();
+    let mut p3_best_path_weight_hist = BTreeMap::new();
+    let mut model_b_histogram = BTreeMap::new();
+
+    let mut sample_head_distinct: Option<WeightedAuditSamplePath> = None;
+    let mut sample_cost_8: Option<WeightedAuditSamplePath> = None;
+    let mut sample_cost_11: Option<WeightedAuditSamplePath> = None;
+    let mut sample_cost_14: Option<WeightedAuditSamplePath> = None;
+
+    for tail_bits in 0..TAIL_SPACE_SIZE {
+        let tail = Tail11::new(tail_bits);
+        let dist_x = reachable_cost(&solved.dist, state_index(Head::X, tail_bits));
+        let dist_y = reachable_cost(&solved.dist, state_index(Head::Y, tail_bits));
+        let dist_z = reachable_cost(&solved.dist, state_index(Head::Z, tail_bits));
+
+        let mut best_head = None;
+        let mut best_cost = INF_COST;
+        for (head, cost) in [(Head::X, dist_x), (Head::Y, dist_y), (Head::Z, dist_z)] {
+            if let Some(cost) = cost {
+                if cost < best_cost {
+                    best_cost = cost;
+                    best_head = Some(head);
+                }
+            }
+        }
+
+        let mut record = SingleShotTailProvenanceRecord {
+            tail_id: tail_bits,
+            tail_pauli: tail.to_label(),
+            dist_x,
+            dist_y,
+            dist_z,
+            best_head,
+            final_cost: (best_cost < INF_COST).then_some(best_cost),
+            source_kind: None,
+            source_head: None,
+            source_cost: None,
+            p3_hop_count: 0,
+            p3_weights: Vec::new(),
+            reconstructed_path_length: 0,
+            model_b_cost: None,
+            path_signature: None,
+        };
+
+        if let Some(best_head) = best_head {
+            let best_state_idx = state_index(best_head, tail_bits);
+            if let Some(trace) = trace_provenance_for_state(&model, &solved, best_state_idx) {
+                record.source_kind = Some(trace.source_kind);
+                record.source_head = Some(trace.source_head);
+                record.source_cost = Some(trace.source_cost);
+                record.p3_hop_count = trace.p3_weights.len() as u32;
+                record.p3_weights = trace.p3_weights.clone();
+                record.reconstructed_path_length = trace.reconstructed_path_length;
+                record.model_b_cost = Some(trace.model_b_cost);
+                record.path_signature = Some(trace.path_signature.clone());
+
+                *overall_current_histogram.entry(best_cost).or_insert(0) += 1;
+                if let Some(source_kind) = record.source_kind {
+                    let source_key = audit_source_kind_label(source_kind).to_string();
+                    *current_by_source_kind
+                        .entry(source_key)
+                        .or_default()
+                        .entry(best_cost)
+                        .or_insert(0) += 1;
+                }
+                *current_by_p3_hop_count
+                    .entry(record.p3_hop_count)
+                    .or_default()
+                    .entry(best_cost)
+                    .or_insert(0) += 1;
+                if let Some(signature) = record.path_signature.as_ref() {
+                    *current_bucket_path_signatures
+                        .entry(best_cost)
+                        .or_default()
+                        .entry(signature.clone())
+                        .or_insert(0) += 1;
+                }
+                for weight in &record.p3_weights {
+                    *p3_best_path_weight_hist.entry(*weight as u32).or_insert(0) += 1;
+                }
+                if let Some(model_b_cost) = record.model_b_cost {
+                    *model_b_histogram.entry(model_b_cost).or_insert(0) += 1;
+                }
+
+                let wants_head_distinct = sample_head_distinct.is_none()
+                    && dist_x.is_some()
+                    && dist_y.is_some()
+                    && dist_z.is_some()
+                    && dist_x != dist_y
+                    && dist_x != dist_z
+                    && dist_y != dist_z;
+                let wants_cost_8 = sample_cost_8.is_none() && record.final_cost == Some(8);
+                let wants_cost_11 = sample_cost_11.is_none() && record.final_cost == Some(11);
+                let wants_cost_14 = sample_cost_14.is_none() && record.final_cost == Some(14);
+
+                if wants_head_distinct || wants_cost_8 || wants_cost_11 || wants_cost_14 {
+                    if let Some(path) = reconstruct_path_from_solution(&model, &solved, best_state_idx) {
+                        if wants_head_distinct {
+                            sample_head_distinct = Some(WeightedAuditSamplePath {
+                                label: "head_costs_differ".to_string(),
+                                provenance: record.clone(),
+                                path: path.clone(),
+                            });
+                        }
+                        if wants_cost_8 {
+                            sample_cost_8 = Some(WeightedAuditSamplePath {
+                                label: "bucket_8".to_string(),
+                                provenance: record.clone(),
+                                path: path.clone(),
+                            });
+                        }
+                        if wants_cost_11 {
+                            sample_cost_11 = Some(WeightedAuditSamplePath {
+                                label: "bucket_11".to_string(),
+                                provenance: record.clone(),
+                                path: path.clone(),
+                            });
+                        }
+                        if wants_cost_14 {
+                            sample_cost_14 = Some(WeightedAuditSamplePath {
+                                label: "bucket_14".to_string(),
+                                provenance: record.clone(),
+                                path,
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+        visit_provenance(&record);
+    }
+
+    let min_cost = histogram.histogram.keys().next().copied();
+    let max_cost = histogram.histogram.keys().next_back().copied();
+    let profile = SingleShotBuildProfile {
+        node_count: (HEAD_COUNT as u64) * (TAIL_SPACE_SIZE as u64),
+        p0_source_count: native_rows.len() as u64,
+        p2_source_count: count_p2_direct_templates(native_rows),
+        axis_count: model.axes.len() as u64,
+        reachable_tail_count: histogram.reachable_targets,
+        unreachable_tail_count: histogram.unreachable_targets,
+        mean_cost: histogram.mean,
+        min_cost,
+        max_cost,
+    };
+
+    let mut sample_paths = Vec::new();
+    if let Some(sample) = sample_head_distinct {
+        sample_paths.push(sample);
+    }
+    if let Some(sample) = sample_cost_8 {
+        sample_paths.push(sample);
+    }
+    if let Some(sample) = sample_cost_11 {
+        sample_paths.push(sample);
+    }
+    if let Some(sample) = sample_cost_14 {
+        sample_paths.push(sample);
+    }
+
+    SingleShotWeightedAuditReport {
+        profile,
+        cost_alphabet: WeightedAuditCostAlphabetReport {
+            p0_source_cost_hist,
+            p2_source_cost_hist,
+            p3_valid_graph_edge_weight_hist: solved.valid_graph_edge_weight_hist,
+            p3_best_path_weight_hist,
+            p0_source_unit: "bicycle-measurement count".to_string(),
+            p2_source_unit: "bicycle-measurement count".to_string(),
+            p3_transition_unit: "bicycle-measurement count".to_string(),
+        },
+        conditional_histograms: WeightedAuditConditionalHistogramReport {
+            overall_current_histogram,
+            current_by_source_kind,
+            current_by_p3_hop_count,
+            current_bucket_path_signatures,
+        },
+        model_compare: WeightedAuditModelCompareReport {
+            model_a_name: "current_weighted_model".to_string(),
+            model_a_histogram: histogram.histogram.clone(),
+            model_a_mean: histogram.mean,
+            model_a_support: histogram.support.clone(),
+            model_b_name: "benchmark_normalized_p3_6_rescore".to_string(),
+            model_b_note: "Re-scores the same best paths by keeping protocol-derived source costs and replacing every P3 hop with 6 bicycle measurements.".to_string(),
+            model_b_mean: mean_from_histogram(&model_b_histogram),
+            model_b_support: model_b_histogram.keys().copied().collect(),
+            model_b_histogram,
+        },
+        sample_paths,
+    }
 }
 
 fn option_min_cost(lhs: Option<u32>, rhs: Option<u32>) -> Option<u32> {

@@ -83,6 +83,34 @@ Many binary crates can be used via their compiled binaries (obtained by `cargo b
 For an example workflow that generates benchmarks see [scripts/README.md](scripts/),
 and more advanced examples are illustrated by Jupyter notebooks in `./notebooks/`.
 
+## Local Gate-Measurement MVP
+
+The `lgm_compiler` Python package is a research MVP front end for local
+gate-measurement compilation. It is not a full Pauli-based computation compiler
+and does not implement LDPC surgery or bicycle instruction scheduling.
+
+The MVP keeps only local single-qubit Clifford frames. Local Clifford gates
+update those frames, while `T`, `Tdg`, `RX`, `RY`, and `RZ` emit structured
+Pauli-axis `Rot` operations under the current local frame. `CNOT` and `TOFFOLI`
+consume their local frames and remain structured `FramedCNOT` and
+`FramedToffoli` operations instead of being commuted into a global Clifford
+frame. This avoids eagerly materializing high-weight Pauli strings for later
+non-Clifford gates.
+
+This is useful for gross-code experiments because direct `T` injection is
+available on pivot logical indices 1 and 7, while arbitrary high-weight Pauli
+measurement synthesis is expensive. The included cost model is intentionally a
+stub: it counts direct pivot injections, non-pivot rotations, X/Z two-qubit
+measurements, structured CNOT/Toffoli macros, and explicit PBC fallbacks.
+
+Run the Python MVP tests and demo with:
+
+```sh
+pytest -q
+python examples/demo_screenshot.py
+python examples/count_cliffords.py
+```
+
 
 ### Testing
 

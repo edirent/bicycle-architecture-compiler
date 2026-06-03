@@ -1,0 +1,60 @@
+{
+  "basis_gates": [
+    "rz",
+    "t",
+    "tdg",
+    "id",
+    "x",
+    "y",
+    "z",
+    "h",
+    "s",
+    "sdg",
+    "sx",
+    "sxdg",
+    "cx",
+    "cz",
+    "cy",
+    "swap",
+    "iswap",
+    "ecr",
+    "dcx"
+  ],
+  "converted_depth": 221,
+  "converted_num_clbits": 29,
+  "converted_ops": {
+    "cx": 812,
+    "h": 29,
+    "u1": 1218
+  },
+  "include_final_measurements": false,
+  "litinski_fix_clifford": false,
+  "logical_qubits": 29,
+  "optimization_level": 0,
+  "original_cx_count": 812,
+  "original_depth": 222,
+  "original_num_clbits": 58,
+  "original_ops": {
+    "barrier": 1,
+    "cx": 812,
+    "h": 29,
+    "measure": 29,
+    "u1": 1218
+  },
+  "original_rz_count": 0,
+  "pbc_depth": 111,
+  "pbc_instruction_count": 1218,
+  "pbc_measurement_count": 0,
+  "pbc_rotation_count": 1218,
+  "python_version": "3.13.5",
+  "qasm_path": "/home/edirent/bicycle-architecture-compiler/external/QASMBench/large/qft_n29/qft_n29.qasm",
+  "qiskit_version": "2.3.0",
+  "removed_final_measurements": true,
+  "transpiled_depth": 221,
+  "transpiled_ops": {
+    "cx": 812,
+    "h": 29,
+    "rz": 1218
+  },
+  "transpiled_rz_count": 1218
+}

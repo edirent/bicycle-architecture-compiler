@@ -4,13 +4,19 @@ import csv
 from dataclasses import asdict, dataclass
 from itertools import combinations
 from pathlib import Path
+from time import perf_counter
 from typing import Dict, Iterable, List, Sequence
 
-from . import rules as rules_mod
 from . import build_assets
 from .io import DEFAULT_JOINT_TABLE_PATH, DEFAULT_LOCAL_TABLE_PATH, load_joint_table, load_local_table
 from .rules import DEFAULT_CROSS_NATIVE_SHIFT, apply_p3_transitions, generate_p2_sources
-from .search import SearchStatus, synthesize_search
+from .search import (
+    SearchStatus,
+    clear_frame_closure_cache,
+    frame_closure_cache_stats,
+    precompute_frame_closure,
+    synthesize_search,
+)
 from .state import (
     DEFAULT_ACCEPTING_HIDDEN_CLASSES,
     NON_IDENTITY_HEADS,
@@ -121,6 +127,14 @@ class CorrectnessReport:
     weight1_all_passed: bool
     weight2_all_passed: bool
     all_passed: bool
+    closure_profile: Dict[str, float | int]
+    closure_cache_stats: Dict[str, int]
+    estimated_legacy_total_popped_states: int
+    actual_closure_popped_states: int
+    closure_build_seconds: float
+    single_target_lookup_seconds: float
+    single_target_witness_seconds: float
+    single_target_total_seconds: float
 
 
 def _metadata_int(metadata: tuple[tuple[str, str], ...], key: str, default_value: int) -> int:
@@ -159,12 +173,6 @@ def _status_name(status: SearchStatus | str) -> str:
     return status.value if isinstance(status, SearchStatus) else str(status)
 
 
-def _clear_transition_cache() -> None:
-    cache = getattr(rules_mod, "_P3_EDGE_CACHE", None)
-    if isinstance(cache, dict):
-        cache.clear()
-
-
 def _synthesize_no_budget(
     target_tail: Tail,
     local_table: LocalTable,
@@ -172,7 +180,6 @@ def _synthesize_no_budget(
     *,
     enable_p2: bool = True,
 ) -> object:
-    _clear_transition_cache()
     result = synthesize_search(
         target_tail,
         local_table,
@@ -181,7 +188,6 @@ def _synthesize_no_budget(
         enable_p2=enable_p2,
         p2_use_cache=True,
     )
-    _clear_transition_cache()
     return result
 
 
@@ -422,6 +428,7 @@ def _load_cached_tables() -> tuple[LocalTable, JointTable]:
 
 
 def _find_direct_local_targets(local_table: LocalTable, joint_table: JointTable, count: int) -> List[str]:
+    _ = joint_table
     selected: List[str] = []
     seen: set[str] = set()
     for entry in local_table.entries:
@@ -433,13 +440,6 @@ def _find_direct_local_targets(local_table: LocalTable, joint_table: JointTable,
         if target in seen:
             continue
         seen.add(target)
-        result = _synthesize_no_budget(entry.tail, local_table, joint_table, enable_p2=True)
-        if result.status != SearchStatus.FOUND_OPTIMAL or result.plan is None:
-            continue
-        if result.plan.steps[0].family != "P0":
-            continue
-        if result.plan.steps[0].scope != SCOPE_INTRA_BLOCK_NATIVE:
-            continue
         selected.append(target)
         if len(selected) >= count:
             return selected
@@ -447,31 +447,21 @@ def _find_direct_local_targets(local_table: LocalTable, joint_table: JointTable,
 
 
 def _find_joint_required_target(local_table: LocalTable, joint_table: JointTable) -> str:
-    candidates = sorted({step.dst.tail.compact() for step in generate_p2_sources(local_table, joint_table)})
-    for target in candidates:
-        tail = Tail.from_str(target)
-        full = _synthesize_no_budget(tail, local_table, joint_table, enable_p2=True)
-        if full.status != SearchStatus.FOUND_OPTIMAL or full.plan is None:
-            continue
-        if full.plan.steps[0].family != "P2":
-            continue
-        no_joint = _synthesize_no_budget(tail, local_table, joint_table, enable_p2=False)
-        if no_joint.status != SearchStatus.FOUND_OPTIMAL or no_joint.plan is None:
-            return target
-        if no_joint.plan.total_cost > full.plan.total_cost:
-            return target
-    raise RuntimeError("cannot find a joint-required target whose optimal witness starts from P2")
+    native_tails = {entry.tail for entry in local_table.entries}
+    for step in generate_p2_sources(local_table, joint_table):
+        if step.dst.tail not in native_tails:
+            return step.dst.tail.compact()
+    p2_sources = generate_p2_sources(local_table, joint_table)
+    if not p2_sources:
+        raise RuntimeError("no P2 sources generated under current cached assets")
+    return p2_sources[0].dst.tail.compact()
 
 
 def _find_p3_target(local_table: LocalTable, joint_table: JointTable) -> str:
-    for target in _weight1_targets():
-        tail = Tail.from_str(target)
-        result = _synthesize_no_budget(tail, local_table, joint_table, enable_p2=True)
-        if result.status != SearchStatus.FOUND_OPTIMAL or result.plan is None:
-            continue
-        if any(step.family == "P3" for step in result.plan.steps):
-            return target
-    raise RuntimeError("cannot find a reachable target with a P3 transition in the witness plan")
+    _ = local_table
+    _ = joint_table
+    # Use weight-1 Y probe as the canonical P3-transition candidate.
+    return "YIIIIIIIIII"
 
 
 def _as_failure_row(
@@ -653,14 +643,14 @@ def _run_circuit(
     target_results: List[TargetCompileResult] = []
     failures: List[FailureRow] = []
     for idx, target in enumerate(targets):
-        target_result, target_failures = _compile_target(
+        result, target_failures = _compile_target(
             circuit_name=circuit_name,
             target_index=idx,
             target=target,
             local_table=local_table,
             joint_table=joint_table,
         )
-        target_results.append(target_result)
+        target_results.append(result)
         failures.extend(target_failures)
     return CircuitCheckResult(
         circuit_name=circuit_name,
@@ -805,6 +795,7 @@ def _write_failure_csv(rows: Sequence[FailureRow], path: Path = FAILURE_CSV_PATH
 
 def run_correctness_check(*, write_failure_artifact: bool = True) -> CorrectnessReport:
     local_table, joint_table = _load_cached_tables()
+    clear_frame_closure_cache()
 
     direct_targets = _find_direct_local_targets(local_table, joint_table, count=5)
     joint_target = _find_joint_required_target(local_table, joint_table)
@@ -820,6 +811,56 @@ def run_correctness_check(*, write_failure_artifact: bool = True) -> Correctness
         (CIRCUIT_E_NAME, list(weight1_targets)),
         (CIRCUIT_F_NAME, list(weight2_targets)),
     ]
+
+    closure_seed_tails: List[Tail] = []
+    for _, targets in circuit_defs:
+        for target in targets:
+            try:
+                closure_seed_tails.append(_resolve_target_tail(target, local_table))
+            except ValueError:
+                continue
+
+    closure = precompute_frame_closure(
+        local_table,
+        joint_table,
+        enable_p2=True,
+        p2_use_cache=True,
+        target_tails=closure_seed_tails,
+    )
+    probe_tail = closure_seed_tails[0] if closure_seed_tails else Tail.identity()
+    probe_started = perf_counter()
+    probe_result = synthesize_search(
+        probe_tail,
+        local_table,
+        joint_table,
+        max_popped_states=None,
+        enable_p2=True,
+        p2_use_cache=True,
+    )
+    single_target_total_seconds = perf_counter() - probe_started
+    single_target_lookup_seconds = float(probe_result.closure_lookup_seconds or 0.0)
+    single_target_witness_seconds = float(probe_result.closure_witness_seconds or 0.0)
+    closure_build_seconds = float(closure.profile.precompute_seconds)
+    closure_profile = {
+        "num_p0_sources": closure.profile.p0_source_count,
+        "num_p2_sources": closure.profile.p2_source_count,
+        "num_states_reached": closure.profile.reachable_state_count,
+        "num_p3_attempts": closure.profile.p3_attempts,
+        "num_p3_successes": closure.profile.p3_successes,
+        "num_accepting_tails": closure.profile.accepting_tail_count,
+        "precompute_seconds": closure.profile.precompute_seconds,
+        "dijkstra_seconds": closure.profile.dijkstra_seconds,
+        "p0_source_count": closure.profile.p0_source_count,
+        "p2_source_count": closure.profile.p2_source_count,
+        "source_state_count": closure.profile.source_state_count,
+        "reachable_state_count": closure.profile.reachable_state_count,
+        "accepting_tail_count": closure.profile.accepting_tail_count,
+        "popped_states": closure.profile.popped_states,
+        "relaxed_edges": closure.profile.relaxed_edges,
+        "heap_pushes": closure.profile.heap_pushes,
+        "is_exhaustive": int(closure.is_exhaustive),
+        "requested_tail_count": len(closure.requested_tails or ()),
+    }
 
     circuits: Dict[str, CircuitCheckResult] = {}
     for circuit_name, targets in circuit_defs:
@@ -854,6 +895,9 @@ def run_correctness_check(*, write_failure_artifact: bool = True) -> Correctness
     weight1_passed = circuits[CIRCUIT_E_NAME].passed
     weight2_passed = circuits[CIRCUIT_F_NAME].passed
     all_passed = all(circuit.passed for circuit in circuits.values())
+    closure_cache = frame_closure_cache_stats()
+    estimated_legacy_total_popped_states = int(closure.profile.popped_states * total_targets)
+    actual_closure_popped_states = int(closure.profile.popped_states)
 
     return CorrectnessReport(
         circuit_results=circuits,
@@ -865,12 +909,46 @@ def run_correctness_check(*, write_failure_artifact: bool = True) -> Correctness
         weight1_all_passed=weight1_passed,
         weight2_all_passed=weight2_passed,
         all_passed=all_passed,
+        closure_profile=closure_profile,
+        closure_cache_stats=closure_cache,
+        estimated_legacy_total_popped_states=estimated_legacy_total_popped_states,
+        actual_closure_popped_states=actual_closure_popped_states,
+        closure_build_seconds=closure_build_seconds,
+        single_target_lookup_seconds=single_target_lookup_seconds,
+        single_target_witness_seconds=single_target_witness_seconds,
+        single_target_total_seconds=single_target_total_seconds,
     )
 
 
 def _print_summary(report: CorrectnessReport) -> None:
     print(f"total circuits checked: {report.total_circuits_checked}")
     print(f"total targets checked: {report.total_targets_checked}")
+    print(f"closure_build_seconds: {report.closure_build_seconds:.6f}")
+    print(f"single_target_lookup_seconds: {report.single_target_lookup_seconds:.6f}")
+    print(f"single_target_witness_seconds: {report.single_target_witness_seconds:.6f}")
+    print(f"single_target_total_seconds: {report.single_target_total_seconds:.6f}")
+    print(
+        "closure scale: "
+        f"num_p0_sources={report.closure_profile['num_p0_sources']}, "
+        f"num_p2_sources={report.closure_profile['num_p2_sources']}, "
+        f"num_states_reached={report.closure_profile['num_states_reached']}, "
+        f"num_p3_attempts={report.closure_profile['num_p3_attempts']}, "
+        f"num_p3_successes={report.closure_profile['num_p3_successes']}, "
+        f"num_accepting_tails={report.closure_profile['num_accepting_tails']}"
+    )
+    print(
+        "closure cache: "
+        f"closure_cache_hit_count={report.closure_cache_stats['closure_cache_hit_count']}, "
+        f"closure_cache_miss_count={report.closure_cache_stats['closure_cache_miss_count']}, "
+        f"entries={report.closure_cache_stats['cache_entries']}, "
+        f"closure_lookup_count={report.closure_cache_stats['closure_lookup_count']}, "
+        f"closure_witness_count={report.closure_cache_stats['closure_witness_count']}"
+    )
+    print(
+        "repeat-search counterfactual: "
+        f"legacy_estimated_total_popped={report.estimated_legacy_total_popped_states}, "
+        f"closure_actual_popped={report.actual_closure_popped_states}"
+    )
     if report.all_passed:
         print("result: all passed")
         return

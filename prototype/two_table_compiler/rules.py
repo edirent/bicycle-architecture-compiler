@@ -358,7 +358,13 @@ def apply_p3_transitions(state: State, axis: NativeEntry, joint_table: JointTabl
     return out
 
 
-def expand_p3_edges(state: State, local_table: LocalTable, joint_table: JointTable) -> List[Step]:
+def expand_p3_edges(
+    state: State,
+    local_table: LocalTable,
+    joint_table: JointTable,
+    *,
+    use_cache: bool = True,
+) -> List[Step]:
     cache_key = (
         id(local_table),
         len(local_table.entries),
@@ -366,11 +372,12 @@ def expand_p3_edges(state: State, local_table: LocalTable, joint_table: JointTab
         len(joint_table.p3_rules),
         state,
     )
-    if cache_key in _P3_EDGE_CACHE:
+    if use_cache and cache_key in _P3_EDGE_CACHE:
         return list(_P3_EDGE_CACHE[cache_key])
 
     transitions: List[Step] = []
     for axis in local_table.native_axes():
         transitions.extend(apply_p3_transitions(state, axis, joint_table))
-    _P3_EDGE_CACHE[cache_key] = tuple(transitions)
+    if use_cache:
+        _P3_EDGE_CACHE[cache_key] = tuple(transitions)
     return transitions

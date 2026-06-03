@@ -178,3 +178,17 @@ temp/
 cache/
 scratch/
 results/generated_tmp/
+
+# Generated benchmark/report artifacts
+artifacts/
+results/benchmarks/
+prototype/two_table_compiler/generated/
+prototype/two_table_compiler/benchmark/results/
+prototype/two_table_compiler/benchmark/bucket14_audit*/
+prototype/two_table_compiler/benchmark/exact_hist_11q/
+prototype/two_table_compiler/benchmark/weighted_audit_11q/
+prototype/two_table_compiler/benchmark/weighted_exact_11q/
+
+# Local build scratch outside the workspace target dir
+target_pm/
+rust_pauli_closure/

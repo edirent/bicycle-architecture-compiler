@@ -22,7 +22,9 @@ use clap::ValueEnum;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 pub struct CodeMeasurement {
-    pub mx: SMatrix<u32, 6, 6>, // 6x6 matrix in F_2. Use u32 to avoid overflow.
+    // Generator actions on the six toric coordinates, stored as integer
+    // matrices but interpreted over GF(2) after every multiplication.
+    pub mx: SMatrix<u32, 6, 6>,
     pub my: SMatrix<u32, 6, 6>,
 }
 
@@ -47,13 +49,17 @@ impl CodeMeasurement {
             Pauli::Y => (one, one),
         };
 
-        // Compute action of automorphism on the Paulis
+        // Compute the shift automorphism as Mx^x My^y over GF(2).
+        // nalgebra multiplies over integers, so each entry is reduced modulo 2.
         let action = |a: AutomorphismData| {
             (self.mx.pow(a.get_x().into()) * self.my.pow(a.get_y().into())).map(|v| v % 2)
         };
-        // X(i) |-> X(A^-1 i) since U_A^\dagger X(i) U_A = X(A^-1 i)
+        // X and Z halves transform differently under conjugation. Keep the
+        // inverse/transpose asymmetry explicit: changing either side breaks
+        // the symplectic commutation relation.
+        // X(i) |-> X(A^-1 i) since U_A^\dagger X(i) U_A = X(A^-1 i).
         let x_action = action(native_measurement.automorphism.inv());
-        // Z(i) |-> Z(A^T i) since U_A^\dagger Z(i) U_A = Z(A^T i)
+        // Z(i) |-> Z(A^T i) since U_A^\dagger Z(i) U_A = Z(A^T i).
         let z_action = action(native_measurement.automorphism).transpose();
 
         let map_x1 = x_action * x1;
@@ -62,7 +68,8 @@ impl CodeMeasurement {
         let map_z7 = z_action * z7;
         let result = stack![map_x1; map_x7; map_z1; map_z7].map(|v| v % 2);
 
-        // Convert to array and then to PauliString
+        // Stack the two X blocks followed by the two Z blocks; PauliString's
+        // bit layout expects all X bits first, then all Z bits.
         let arr: [_; 24] = result.into();
         (&arr).into()
     }
